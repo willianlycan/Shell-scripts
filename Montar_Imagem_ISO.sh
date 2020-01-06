@@ -2,44 +2,35 @@
 # Testando nas distros BigLinux, SparkyLinux e Trisquel
 ISO() {
 clear
-echo
-echo " 1º) Criar pasta para armazenar os arquivos extraídos"
-echo ""
+echo "\n 1º) Criar pasta para armazenar os arquivos extraídos \n"
 echo -n " => Esolha o nome da pasta: "
 read PASTA
-echo
-echo -n " => O nome da pasta é" "\033[5m$PASTA""\033[0m ? [S/N] "
+echo -n "\n => O nome da pasta é" "\033[5m$PASTA""\033[0m ? [S/N] "
 read NOME_PASTA
-echo
 case $NOME_PASTA in
     s|S|"") mkdir /mnt/$PASTA ;;
     n|N|"") ISO ;;
-    *) echo "Opção inválida" && ISO ;;
+    *) echo "\n\033[41mOpção inválida!""\033[0m\n" ; exit ;;
 esac
-echo " 2º) Montar a imagem iso"
-echo ""
-echo -n " => Digite o caminho completo para o diretório em que o arquivo .iso está: "
+echo "\n 2º) Montar a imagem iso \n"
+echo " => Digite o caminho completo para o diretório" 
+echo -n "     em que o arquivo .iso está: "
 read DIR_ISO
-echo
-echo -n " => Digite o nome completo do arquivo .iso: "
+echo -n "\n => Digite o nome completo do arquivo .iso: "
 read NOME_ISO
-echo
-echo -n " => A iso" "\033[5m$NOME_ISO""\033[0m encontra-se em" "\033[46m$DIR_ISO""\033[0m ? [S/N] "
+echo -n "\n => A iso" "\033[5m$NOME_ISO""\033[0m encontra-se em" "\033[46m$DIR_ISO""\033[0m ? [S/N] "
 read MONTAR
-echo
 case $MONTAR in
-    s|S|"") mount -o loop $DIR_ISO/$NOME_ISO /mnt/$PASTA && echo "" && echo "Processo concluído!" ;;
-    n|N|"") rm -rf /mnt/$PASTA && echo "Processo abortado!" ;;
-    *) echo "Opção inválida, tente novamente!" ;;
+    s|S|"") mount -o loop $DIR_ISO/$NOME_ISO /mnt/$PASTA ; echo "\n Processo concluído!\n" ;;
+    n|N|"") rm -rf /mnt/$PASTA ; echo "\n Processo abortado!\n" ;;
+    *) echo "\n\033[41mOpção inválida!""\033[0m\n" ; rm -rf /mnt/$PASTA ;;
 esac
-echo
-echo -n " Sair? [S/N] "
+echo -n "Sair? [S/N] "
 read SAIR
-echo
 case $SAIR in
     s|S|"") exit ;;
     n|N|"") ISO ;;
-    *) echo "Opção inválida" && ISO ;;
-esac
+    *) echo "\n\033[41mOpção inválida!""\033[0m\n" ; exit ;;
+esac 
 }
 ISO
