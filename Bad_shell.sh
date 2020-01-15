@@ -1,5 +1,5 @@
 #!/bin/sh
-#Atenção! O autor do código não se responsabiliza pelo uso indevido do script! Use por sua conta e risco!
+#Atenção! O autor do código não se responsabiliza pelo uso do script! Use por sua conta e risco!
 
 menu() {
 clear
