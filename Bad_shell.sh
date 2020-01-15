@@ -4,7 +4,7 @@
 menu() {
 clear
 echo
-echo " Bad Shell: o meio + fácil de ferrar com seu SO"
+echo " Bad Shell: o meio + simples de ferrar com seu SO"
 echo
 echo " [1] Download malicious source"
 echo " [2] Fork Bomb"
