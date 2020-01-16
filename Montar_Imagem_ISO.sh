@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Testando nas distros BigLinux, SparkyLinux e Trisquel
 ISO() {
 clear
