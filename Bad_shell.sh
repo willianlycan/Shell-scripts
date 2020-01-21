@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #Atenção! O autor do código não se responsabiliza pelo uso do script! Use por sua conta e risco!
-
 function menu() {
  clear
   echo
