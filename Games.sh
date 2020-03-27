@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 #Testado no BigLinux
-function Menuini() {
-clear 
- [ -e /bin/firefox ] || echo -e '''  \033[31mFirefox \033[34mBrowser\033[0m \033[5mnão está instalado! \033[0m'''
- [ -e /bin/lutris ] || echo -e '''\n  A Plataforma de jogos \033[33mLutris\033[0m \033[5mnão está instalada! \033[0m'''
- [ -e /bin/wine ] || echo -e '''\n  \033[31m\033[1mW\033[32mi\033[33mn\033[34me \033[0m \033[5mnão está instalado! \033[0m\n'''
+declare -a INSTALLED=("\n  O jogo está instalado! \n")
+           CONTINUE=("  Pressione uma tecla para continuar...")
+           APT_INSTALL=("sudo apt install")
+           SELECT=("\n  Selecione um instalador na plataforma \033[33mLutris\033[0m \n")
+           COMPLETED=("\n  Processo de instalação concluído! \n")
+           WHEREISIT=("\n  O diretório do jogo está em")
+           NOT_FOUND=("\n  O arquivo do jogo \033[5mnão\033[0m está em /Downloads! \n \n Por favor, baixe o arquivo na página que irá carregar em seu navegador. \n")
+           NOT_INSTALLED=("\n  O jogo \033[5mnão\033[0m está instalado! \n")
 
- echo -e ''' ----------------------------------------------
-    \033[1mJogos no Linux Ubuntu e derivados\033[0m
- ----------------------------------------------
- {A}-> Baixar e instalar jogos                       
- {B}-> Baixar e instalar recursos para gameplay
- {C}-> Jogar no navegador
- {D}-> Play games
- {E}-> Sair                                     
- ----------------------------------------------\n'''
+function Menuini() {
+clear && echo -e "\n     \033[1mJogos para Linux Ubuntu e derivados\033[0m \n
+ {A} Baixar e instalar jogos \n {B} Baixar e instalar recursos para gameplay
+ {C} Jogar no navegador \n {D} Play games
+ {X} Sair \n"
   echo -n "  => Esolha uma das opções: "
    read -n1 OPTION && echo
 
@@ -23,23 +22,16 @@ clear
      b|B|"") Gameplay ;;
      c|C|"") Firefox ;;
      d|D|"") TermExec ;;
-     e|E|"") clear && exit ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Menuini ;;
+     x|X|"") clear && exit ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Menuini ;;
    esac
  }
 
 function Joojs() {
-clear && echo -e ''' -------------------------------
- {A}-> Ação
- {B}-> Arcade
- {C}-> Aventura
- {D}-> Educativos
- {E}-> Estratégia
- {F}-> Multiplayer online
- {G}-> RPG
- {H}-> Simuladores
- {I}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} Ação \n {B} Arcade \n {C} Aventura
+ {D} Educativos \n {E} Esportes \n {F} Estratégia
+ {G} FPS+RTS \n {H} MMORPG \n {I} RPG \n {J} Simuladores \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 OPTION2 && echo
   
@@ -48,282 +40,331 @@ clear && echo -e ''' -------------------------------
      b|B|"") Arcade ;;
      c|C|"") Adventure ;;
      d|D|"") Educ ;;
-     e|E|"") Estrategia ;;
-     f|F|"") MultiOn ;;
-     g|G|"") RPG ;;
-     h|H|"") Simuladores ;;
-     i|I|"") Menuini ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Joojs ;;
+     e|E|"") Esportes ;;
+     f|F|"") Estrategia ;;
+     g|G|"") Fpsgs ;;
+     h|H|"") Mmorpg ;;
+     i|I|"") Rpg ;;
+     j|J|"") Simuladores ;;
+     z|Z|"") Menuini ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Joojs ;;
    esac
  }
   
 function Action() {
-clear && echo -e ''' -------------------------------
- {A}-> Luta
- {B}-> Plataforma
- {C}-> Sobrevivência
- {D}-> Stealth (ação furtiva)
- {E}-> Survival Horror (terror)
- {F}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} Casual \n {B} Combate veicular \n {C} FPS
+ {D} Luta \n {E} Plataforma \n {F} Sobrevivência
+ {G} Stealth (ação furtiva) \n {H} Survival Horror (terror) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n "  => Esolha uma das opções: "
    read -n1 OPTION4 && echo
 
    case $OPTION4 in
-     a|A|"") Lutinha ;;
-     b|B|"") Plataforma ;;
-     c|C|"") Survival ;;
-     d|D|"") TDM ;;
-     e|E|"") Terror ;;
-     f|F|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Action ;;
+     a|A|"") Casual ;;
+     b|B|"") Combate ;;
+     c|C|"") Fpson ;;
+     d|D|"") Lutinha ;;
+     e|E|"") Plataforma ;;
+     f|F|"") Survival ;;
+     g|G|"") Tdm ;;
+     h|H|"") Terror ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Action ;;
    esac
  }
 
+function Casual() {
+clear && echo -e "\n {A} Armagetron Advanced \n {B} Funguloids \n {C} Liquid War \n {D} Vertigo \n
+ {Z} Retornar ao menu anterior \n"
+  echo -n " => Esolha uma das opções: "
+   read -n1 CASUAL && echo
+
+   case $CASUAL in
+     a|A|"") [ -e /usr/games/armagetronad ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Casual || echo && $APT_INSTALL armagetronad && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Casual ;;
+     b|B|"") [ -e /usr/games/funguloids ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Casual || echo && $APT_INSTALL funguloids && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Casual ;;
+     c|C|"") [ -e /usr/games/liquidwar ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Casual || echo && $APT_INSTALL liquidwar && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Casual ;;
+     d|D|"") [ -e ~/Games/vertigo/launch.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Casual || echo -e "$SELECT" && sleep 5 && lutris install/vertigo && Casual ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Casual ;;
+   esac
+}
+ 
+function Combate() {
+clear && echo -e "\n {A} BZFlag \n {B} SuperTuxKart \n {C} Zero Ballistics \n
+ {Z} Retornar ao menu anterior \n"
+  echo -n " => Esolha uma das opções: "
+   read -n1 VEICULAR && echo
+   
+   case $VEICULAR in
+     a|A|"") [ -e /snap/bzflag/1/bin/bzflag ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Combate || [ -e /snap/core ] && echo && sudo snap install bzflag && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Combate || echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Combate ;;
+     b|B|"") [ -e ~/Games/supertuxkart/run_game.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Combate || echo -e "$SELECT" && sleep 3 && lutris install/supertuxkart && Combate ;;
+     c|C|"") [ -e ~/Games/zero-ballistics/start_client.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Combate || echo -e "$SELECT" && sleep 5 && lutris install/zero-ballistics && Combate ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Combate ;;
+   esac
+}
+ 
+ function Fpson() {
+clear && echo -e "\n {A} Alien Arena \n {B} AssaultCube Reloaded \n {C} Cube 2: Sauerbraten
+ {D} Freedoom \n {E} Nexuiz \n {F} OpenArena \n {G} Red Eclipse \n {H} Uebergame
+ {I} Urban Terror \n {J} Warsow \n {K} Wolfenstein: Enemy Territory \n {L} Xonotic \n
+ {Z} Retornar ao menu anterior \n"
+  echo -n " => Esolha uma das opções: "
+   read -n1 FPSY && echo
+   
+   case $FPSY in
+     a|A|"") [ -e /usr/games/alien-arena ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && $APT_INSTALL alien-arena && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     b|B|"") [ -e ~/Games/assaultcube-reloaded/client.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo -e "$SELECT" && sleep 3 && lutris install/assaultcube-reloaded && Fpson ;;
+     c|C|"") [ -e ~/Games/sauerbraten-cube-2/sauerbraten_unix ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo -e "$SELECT" && sleep 3 && lutris install/sauerbraten-cube-2 && Fpson ;;
+     d|D|"") [ -e /usr/games/freedoom1 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && $APT_INSTALL freedoom && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     e|E|"") [ -e /usr/games/nexuiz ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && $APT_INSTALL nexuiz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     f|F|"") [ -e ~/Games/openarena/openarena.x86_64 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo -e "$SELECT" && sleep 3 && lutris install/openarena && Fpson ;;
+     g|G|"") [ -e /usr/games/redeclipse ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && $APT_INSTALL redeclipse && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     h|H|"") [ -e ~/Downloads/Uebergame-1.1.2.0.zip/Uebergame-1.1.2.0/Uebergame ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Fpson || echo && [ -e ~/Downloads/Uebergame-1.1.2.0.zip ] && cd ~/Downloads && unzip Uebergame-1.1.2.0.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && cd ~/Downloads && wget https://duion.com/files/games Uebergame-1.1.2.0.zip && unzip Uebergame-1.1.2.0.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     i|I|"") [ -e ~/Games/urban-terror/prefix/drive_c/Program Files/Urban Terror/Quake3-UrT.exe ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo -e "$SELECT" && sleep 3 && lutris install/urban-terror && Fpson ;;
+     j|J|"") [ -e ~/Downloads/warsow-2.1.2/warsow ] && echo -e echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && [ -e ~/Downloads/warsow-2.1.2.tar.gz ] && cd ~/Downloads && tar -vzxf warsow-2.1.2.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && cd ~/Downloads && wget http://warsow.net/warsow-2.1.2.tar.gz && tar -vzxf warsow-2.1.2.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     k|K|"") [ -e /usr/local/games/enemy-territory/et ] && echo -e "$WHEREISIT /usr/local/games! \n" && read -n1 -s -p "$CONTINUE" && Fpson || echo && [ -e ~/Downloads/et260b.x86_full.zip ] && cd ~/Downloads && unzip et260b.x86_full.zip && $APT_INSTALL sntp && echo && sudo ./et260b.x86_keygen_V03.run && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson || echo && cd ~/Downloads && wget https://cdn.splashdamage.com/downloads/games/wet/et260b.x86_full.zip && unzip et260b.x86_full.zip && $APT_INSTALL sntp && echo && sudo ./et260b.x86_keygen_V03.run && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpson ;;
+     l|L|"") [ -e ~/Games/xonotic/xonotic-linux-glx.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpson || echo -e "$SELECT" && sleep 3 && lutris install/xonotic && Fpson ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Fpson ;;
+   esac
+ }
+ 
 function Lutinha() {
-clear && echo -e ''' ----------------------------------------
- {A}-> Bootfighter Windom XP sp-2
- {B}-> Terrordrome: Rise of the Boogeyman
- {C}-> Retornar ao menu anterior
- ----------------------------------------\n'''
+clear && echo -e "\n {A} Bootfighter Windom XP sp-2 \n {B} Terrordrome: Rise of the Boogeyman \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 OPTIONX && echo
 
    case $OPTIONX in
-     a|A|"") [ -e /home/$USER/Downloads/Bootfighter_Windom_XP_sp-2.NET_v1.031_[mirror_moon].exe ] && wine /home/$USER/Downloads/Bootfighter_Windom_XP_sp-2.NET_v1.031_[mirror_moon].exe && Lutinha ||  echo -e '''\n  O instalador do jogo \033[46mBootfighter Windom XP sp-2\033[0m \033[5mnão\033[0m foi encontrado! 
-     
-  Por favor, baixe o instalador na página que abrirá em seu navegador.\n''' && sleep 5 && firefox https://baixar.freedownloadmanager.org/Windows-PC/Bootfighter-Windom-XP-sp-2/GRATUITO-1.031.html && Lutinha ;;
-     b|B|"") [ -e /home/$USER/Downloads/TRDM-Linux-Mac-2_10_3.exe ] && wine /home/$USER/Downloads/TRDM-Linux-Mac-2_10_3.exe && Lutinha ||  echo -e '''\n  O instalador do jogo \033[46mTerrordrome: Rise of the Boogeyman\033[0m para Linux \033[5mnão\033[0m foi encontrado! 
-     
-  Por favor, baixe o instalador na página que abrirá em seu navegador.\n''' && sleep 3 && firefox http://terrordrome-thegame.com/download && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lutinha ;;
-     c|C|"") Action ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Lutinha ;;
+     a|A|"") [ -e ~/Downloads/Bootfighter_Windom_XP_sp-2.NET_v1.031_[mirror_moon].exe ] && wine ~/Downloads/Bootfighter_Windom_XP_sp-2.NET_v1.031_[mirror_moon].exe && Lutinha ||  echo -e "$NOT_FOUND" && sleep 5 && firefox https://baixar.freedownloadmanager.org/Windows-PC/Bootfighter-Windom-XP-sp-2/GRATUITO-1.031.html && Lutinha ;;
+     b|B|"") [ -e ~/Downloads/TRDM-Linux-Mac-2_10_3.exe ] && wine ~/Downloads/TRDM-Linux-Mac-2_10_3.exe && Lutinha ||  echo -e "$NOT_FOUND" && sleep 5 && firefox http://terrordrome-thegame.com/download && read -n1 -s -p "$CONTINUE" && Lutinha ;;
+     Z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Lutinha ;;
    esac
  }
 
 function Plataforma() {
-clear && echo -e ''' -------------------------------
- {A}-> Cows Revenge
- {B}-> Frogatto
- {C}-> Mr. Rescue
- {D}-> reTux
- {E}-> SuperTux
- {F}-> The Legend of Edgar
- {G]-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} CaveExpress \n {B} Cows Revenge \n {C} Frogatto
+ {D} Mr. Rescue \n {E} reTux \n {F} SuperTux \n {G} The Legend of Edgar \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 PLATAFORMA && echo
 
    case $PLATAFORMA in
-     a|A|"") [ -e /home/$USER/Downloads/CowsRevenge.x86_64 ] && cd ~/Downloads && chmod +x CowsRevenge.x86_64 && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo -e '''\n  O arquivo \033[46mCowsRevenge.x86_64\033[0m \033[5mnão\033[0m foi baixado! 
-     
-  Por favor, baixe o arquivo na página que abrirá em seu 
-  navegador.\n''' && sleep 3 && firefox https://pipoypipagames.itch.io/cows-revenge && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma ;;
-     b|B|"") [ -e /usr/games/frogatto ] && echo -e '''\n  Frogatto \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo && sudo apt install frogatto && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma ;;
-     c|C|"") [ -e /usr/games/mrrescue ] && echo -e '''\n  Mr. Rescue \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo && sudo apt install mrrescue && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma ;;
-     d|D|"") [ -e /home/$USER/Downloads/retux-1.3.6-linux-gnu-x86_64/retux ] && echo -e '''\n  O diretório do jogo reTux \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo && [ -e /home/$USER/Downloads/retux-1.3.6-linux-gnu-x86_64.tar.gz ] && cd /home/$USER/Downloads && tar -vzxf retux-1.3.6-linux-gnu-x86_64.tar.gz && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || cd /home/$USER/Downloads && wget http://download.savannah.gnu.org/releases/retux/1.3/retux-1.3.6-linux-gnu-x86_64.tar.gz && tar -vzxf retux-1.3.6-linux-gnu-x86_64.tar.gz && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma ;;
-     e|E|"") [ -e home/$USER/Games/supertux/SuperTux_2-v0.6.0.glibc2.14-x86_64.AppImage ] && echo -e '''\n  SuperTux \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/supertux && Plataforma ;;
-     f|F|"") [ -e /usr/games/edgar ] && echo -e '''\n  The Legend of Edgar \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || echo && [ -e /home/$USER/Downloads/edgar-1.31-1.x86_64.deb ] && sudo dpkg -i /home/$USER/Downloads/edgar-1.31-1.x86_64.deb && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma || cd /home/$USER/Downloads && wget https://github.com/riksweeney/edgar/releases/download/1.31/edgar-1.31-1.x86_64.deb && sudo dpkg -i edgar-1.31-1.x86_64.deb && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Plataforma ;;
-     g|G|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Plataforma ;;
+     a|A|"") [ -e ~/Games/cave-express/caveexpress ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo -e "$SELECT" && sleep 3 && lutris install/cave-express && Plataforma ;;
+     b|B|"") [ -e ~/Downloads/CowsRevenge.x86_64 ] && cd ~/Downloads && chmod +x CowsRevenge.x86_64 && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo -e "$NOT_FOUND" && sleep 5 && firefox https://pipoypipagames.itch.io/cows-revenge && read -n1 -s -p "$CONTINUE" && Plataforma ;;
+     c|C|"") [ -e /usr/games/frogatto ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo && $APT_INSTALL frogatto && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Plataforma ;;
+     d|D|"") [ -e /usr/games/mrrescue ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo && $APT_INSTALL mrrescue && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Plataforma ;;
+     e|E|"") [ -e ~/Downloads/retux-1.3.6-linux-gnu-x86_64/retux ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Plataforma || echo && [ -e ~/Downloads/retux-1.3.6-linux-gnu-x86_64.tar.gz ] && cd ~/Downloads && tar -vzxf retux-1.3.6-linux-gnu-x86_64.tar.gz && echo && read -n1 -s -p "$CONTINUE" && Plataforma || cd ~/Downloads && wget http://download.savannah.gnu.org/releases/retux/1.3/retux-1.3.6-linux-gnu-x86_64.tar.gz && tar -vzxf retux-1.3.6-linux-gnu-x86_64.tar.gz && echo && read -n1 -s -p "$CONTINUE" && Plataforma ;;
+     f|F|"") [ -e ~/Games/supertux/SuperTux_2-v0.6.0.glibc2.14-x86_64.AppImage ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo -e "$SELECT" && sleep 5 && lutris install/supertux && Plataforma ;;
+     g|G|"") [ -e /usr/games/edgar ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Plataforma || echo && [ -e ~/Downloads/edgar-1.31-1.x86_64.deb ] && sudo dpkg -i ~/Downloads/edgar-1.31-1.x86_64.deb && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Plataforma || cd ~/Downloads && wget https://github.com/riksweeney/edgar/releases/download/1.31/edgar-1.31-1.x86_64.deb && sudo dpkg -i edgar-1.31-1.x86_64.deb && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Plataforma ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Plataforma ;;
    esac
  }
 
 function Survival() {
-clear && echo -e ''' --------------------------------
- {A}-> Minetest
- {B}-> Retornar ao meunu anterior
- --------------------------------\n'''
+clear && echo -e "\n       \033[1mMinetest\033[0m \n \n {A} Instalar \n
+ {Z} Retornar ao meunu anterior \n"
  echo -n " => Escolha uma das opções: "
    read -n1 SOBREVIVER && echo
 
    case $SOBREVIVER in
-     a|A|"") [ -e /usr/games/minetest ] && echo -e '''\n  Minetest \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Survival || echo && sudo apt install minetest* && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Survival ;;
-     b|B|"") Action ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Survival ;;
+     a|A|"") [ -e /usr/games/minetest ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Survival || echo && $APT_INSTALL minetest* && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Survival ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Survival ;;
    esac
  }
  
-function TDM() {
-clear && echo -e ''' ----------------------------------------------
- The Dark Mod (Ação furtiva em primeira pessoa)
- ----------------------------------------------\n
- {A}-> Instalação via Lutris
- {B}-> Retornar ao menu anterior\n
- ----------------------------------------------\n'''
+function Tdm() {
+clear && echo -e "\n Jogo furtivo em primeira pessoa, \n com ambientação gótico steampunk.\n
+       \033[1mThe Dark Mod\033[0m \n \n {A} Instalação via Lutris \n
+ {Z} Retornar ao menu anterior \n"
  echo -n " => Escolha uma das opções: "
    read -n1 TDMX && echo
 
    case $TDMX in
-     a|A|"") [ -e /home/$USER/Games/the-dark-mod/thedarkmod.x64 ] && echo -e '''\n  The Dark Mod \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TDM || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/the-dark-mod && TDM ;;
-     b|B|"") Action ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && TDM ;;
+     a|A|"") [ -e ~/Games/the-dark-mod/thedarkmod.x64 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Tdm || echo -e "$SELECT" && sleep 5 && lutris install/the-dark-mod && Tdm ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Tdm ;;
    esac
  }
 
 function Terror() {
-clear && echo -e ''' --------------------------------
- {A}-> Eyes - the Horror Game
- {B}-> SCP: Containment Breach
- {C}-> Slender The Nine Pages
- {D}-> Retornar ao menu anterior
- -------------------------------- \n'''
-  echo -n " => Escolha uma das opções: "
+clear && echo -e "\n {A} Eyes - the Horror Game \n {B} SCP: Containment Breach \n {C} Slender The Nine Pages\n
+ {Z} Retornar ao menu anterior \n"
    read -n1 HORROR && echo
 
    case $HORROR in
-     a|A|"") [ -e /home/$USER/Games/eyes-the-horror-game/eyes-2.2-linux/eyes-2.2-linux ] && echo -e '''\n  Eyes - the Horror Game \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Terror || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/eyes-the-horror-game && Terror ;;
-     b|B|"") [ -e /home/$USER/Games/scp-containment-breach/drive_c/Program Files/SCP - Containment Breach/SCP - Containment Breach.exe ] && echo -e '''\n  SCP: Containment Breach \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Terror || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/scp-containment-breach && Terror ;;
-     c|C|"") [ -e /home/$USER/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux ] && echo -e '''\n  O diretório do jogo Slender The Nine Pages + for Linux \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Terror || [ -e /home/$USER/Downloads/Slender_The_Nine_Pages_v1.3_for_Linux.rar ] && cd /home/$USER/Downloads && unrar x Slender_The_Nine_Pages_v1.3_for_Linux.rar && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && Terror || echo -e '''\n  O arquivo \033[46mSlender_The_Nine_Pages_v1.3_for_Linux.rar\033[0m \033[5mnão\033[0m foi 
-  baixado! 
-     
-  Por favor, baixe o arquivo na página que abrirá em seu 
-  navegador.\n''' && sleep 3 && firefox https://www.indiedb.com/games/slender-the-nine-pages/downloads/slender-the-nine-pages-v131 && read -n1 -s -p "  Pressione uma tecla para continuar..." && Terror ;;
-     d|D|"") Action ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Terror ;;
+     a|A|"") [ -e ~/Games/eyes-the-horror-game/eyes-2.2-linux/eyes-2.2-linux ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Terror || echo -e "$SELECT" && sleep 5 && lutris install/eyes-the-horror-game && Terror ;;
+     b|B|"") [ -e ~/Games/scp-containment-breach/drive_c/Program Files/SCP - Containment Breach/SCP - Containment Breach.exe ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Terror || echo -e "$SELECT" && sleep 3 && lutris install/scp-containment-breach && Terror ;;
+     c|C|"") [ -e ~/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p " $CONTINUE" && Terror || [ -e ~/Downloads/Slender_The_Nine_Pages_v1.3_for_Linux.rar ] && cd ~/Downloads && unrar x Slender_The_Nine_Pages_v1.3_for_Linux.rar && echo && read -n1 -s -p "$CONTINUE" && Terror || echo -e "$NOT_FOUND" && sleep 5 && firefox https://www.indiedb.com/games/slender-the-nine-pages/downloads/slender-the-nine-pages-v131 && read -n1 -s -p " $CONTINUE" && Terror ;;
+     z|Z|"") Action ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Terror ;;
    esac
  }
 
 function Arcade() {
-clear && echo -e ''' ---------------------------------------------
- {A}-> Armagetron Advanced | {B}-> AstroMenace
- {C}-> BillardGL           | {D}-> Bitfighter
- {E}-> Funguloids          | {F}-> Liquid War
- {G}-> Maelstron           | {H}-> M.A.R.S.
- {I}-> Neverputt           | {J}-> Stunt Rally
- {K}-> Teeworlds           | [L}-> YSoccer
- 
- {M}-> Retornar ao menu anterior
- ---------------------------------------------\n'''
+clear && echo -e "\n {A} Corrrida \n {B} Mirror Magic \n {C} Musical
+ {D} Pacman Clone \n {E} Teeworlds \n {F} Top-down shooter \n {G} xgalaga++ \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 FLIPERAMA && echo
 
    case $FLIPERAMA in
-     a|A|"") [ -e /usr/games/armagetronad ] && echo -e '''\n  Armagetron Advanced \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install armagetronad && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     b|B|"") [ -e /usr/games/astromenace ] && echo -e '''\n  AstroMenace \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install astromenace && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     c|C|"") [ -e /usr/games/billard-gl ] && echo -e '''\n  BillardGL \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install billard-gl && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     d|D|"") [ -e /home/$USER/Games/bitfighter/bitfighter ] && echo -e '''\n  Bitfighter \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/bitfighter && Arcade ;;
-     e|E|"") [ -e /usr/games/funguloids ] && echo -e '''\n  Funguloids \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install funguloids && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     f|F|"") [ -e /usr/games/liquidwar ] && echo -e '''\n  Liquid War \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install liquidwar && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     g|G|"") [ -e /usr/games/maelstrom ] && echo -e '''\n  Maelstron \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install maelstrom && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     h|H|"") [ -e /usr/games/marsshooter ] && echo -e '''\n  M.A.R.S. \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install marsshooter && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     i|I|"") [ -e /usr/games/neverputt ] && echo -e '''\n  Neverputt \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install neverputt && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     j|J|"") [ -e /home/$USER/Downloads/StuntRally-2.6-linux64/stuntrally ] && echo -e '''\n  O diretório do jogo Stunt Rally \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && [ -e /home/$USER/Downloads/StuntRally-2.6-linux.tar.gz ] && cd /home/$USER/Downloads && tar -vzxf StuntRally-2.6-linux.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || cd /home/$USER/Downloads && wget https://sourceforge.net/projects/stuntrally/files/2.6/StuntRally-2.6-linux.tar.gz && tar -vzxf StuntRally-2.6-linux.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     k|K|"") [ -e /usr/games/teeworlds ] && echo -e '''\n  Teeworlds \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && sudo apt install teeworlds && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     l|L|"") [ -e /home/$USER/Downloads/ysoccer19_linux64/ysoccer ] && echo -e '''\n  O diretório do jogo YSoccer \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || echo && [ -e /home/$USER/Downloads/ysoccer19_linux64.tar.gz ] && cd /home/$USER/Downloads && tar -vzxf ysoccer19_linux64.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade || cd /home/$USER/Downloads && wget https://sourceforge.net/projects/ysoccer/files/YSoccer19/ysoccer19_linux64.tar.gz && tar -vzxf ysoccer19_linux64.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Arcade ;;
-     m|M|"") Joojs ;;
+     a|A|"") Nfs ;;
+     b|B|"") [ -e ~/Downloads/mirrormagic-3.0.0/mirrormagic ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Arcade || echo && [ -e ~/Downloads/mirrormagic-3.0.0.tar.gz ] && cd ~/Downloads && tar -vsxf mirrormagic-3.0.0.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade || cd ~/Downloads && wget https://www.artsoft.org/RELEASES/unix/mirrormagic/mirrormagic-3.0.0.tar.gz && tar -vsxf mirrormagic-3.0.0.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade ;;
+     c|C|"") Music ;;
+     d|D|"") [ -e /usr/games/pacman ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Arcade || echo && [ -e ~/Downloads/pacman-master.zip ] && cd ~/Downloads && unzip pacman-master.zip && $APT_INSTALL libsdl2-* && echo && ./autogen.sh && echo && ./configure && echo && make && echo && make install && cd .. && rm -rf pacman-master.zip pacman-master && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade || cd ~/Downloads && wget https://github.com/ebuc99/pacman/archive/master.zip && unzip pacman-master.zip && cd pacman-master && $APT_INSTALL libsdl2-* && echo && ./autogen.sh && echo && ./configure && echo && make && echo && make install && cd .. && rm -rf pacman-master.zip pacman-master && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade ;;
+     e|E|"") [ -e /usr/games/teeworlds ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Arcade || echo && $APT_INSTALL teeworlds && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade ;;
+     f|F|"") Tdshooter ;;
+     g|G|"") [ -e /usr/games/xgalaga++ ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Arcade || echo && $APT_INSTALL xgalaga++ && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade ;;
+     z|Z|"") Joojs ;;
      *) echo -e "\n  \033[41mOpção inválida!\033[0m" && sleep 3 && Arcade ;;
    esac
  }
+ 
+function Nfs() { 
+clear && echo -e "\n {A} H-Craft Championship \n {B} Stunt Rally \n
+ {Z} Retornar ao menu anterior \n"
+ echo -n " => Escolha uma das opções: "
+   read -n1 MASTER_RACE && echo
+   
+   case $MASTER_RACE in
+     a|A|"") [ -e ~/Downloads/hcraft/hcraft ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Nfs || echo && [ -e ~/Downloads/hcraft_v1_3b.zip ] && cd ~/Downloads && unzip hcraft_v1_3b.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Nfs || cd ~/Downloads && wget http://www.irrgheist.com/media/div/hcraft_v1_3b.zip && unzip hcraft_v1_3b.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Nfs ;;
+     b|B|"") [ -e ~/Downloads/StuntRally-2.6-linux64/stuntrally ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Nfs || echo && [ -e ~/Downloads/StuntRally-2.6-linux.tar.gz ] && cd cd ~/Downloads && tar -vzxf StuntRally-2.6-linux.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Nfs || cd ~/Downloads && wget https://sourceforge.net/projects/stuntrally/files/2.6/StuntRally-2.6-linux.tar.gz && tar -vzxf StuntRally-2.6-linux.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Nfs ;;
+     z|Z|"") Arcade ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Nfs ;;
+   esac
+ }
 
+function Music() {
+clear && echo -e "\n     \033[1m\033[31mFrets on Fire\033[0m \n \n {A} Instalar \n
+ {Z} Retornar ao menu anterior \n"
+ echo -n " => Escolha uma das opções: "
+   read -n1 MUSICAL && echo
+   
+   case $MUSICAL in
+     a|A|"") [ -e /usr/games/fretsonfire ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Music || echo && sudo apt install fretsonfire && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Music ;;
+     z|Z|"") Arcade ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Music ;;
+   esac
+ }
+
+function Tdshooter() {
+clear && echo -e "\n {A} AstroMenace \n {B} Bitfighter \n {C} C-Dogs SDL
+ {D} Maelstron \n {E} M.A.R.S. \n {F} The Pandoran War \n
+ {Z} Retornar ao menu anterior \n"
+ echo -n " => Escolha uma das opções: "
+   read -n1 TOPDS && echo
+   
+   case $TOPDS in
+     a|A|"") [ -e /usr/games/astromenace ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && $APT_INSTALL astromenace && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter ;;
+     b|B|"") [ -e ~/Games/bitfighter/bitfighter ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo -e "$SELECT" && sleep 5 && lutris install/bitfighter && Tdshooter ;;
+     c|C|"") [ -e ~/Downloads/C-Dogs SDL-0.7.3-Linux/bin/cdogs-sdl ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && [ -e ~/Downloads/C-Dogs.SDL-0.7.3-Linux.tar.gz ] && cd ~/Downloads && tar -vsxf C-Dogs.SDL-0.7.3-Linux.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && wget https://github.com/cxong/cdogs-sdl/releases/download/0.7.3/C-Dogs.SDL-0.7.3-Linux.tar.gz && cd ~/Downloads && tar -vsxf C-Dogs.SDL-0.7.3-Linux.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter ;;
+     d|D|"") [ -e /usr/games/maelstrom ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && $APT_INSTALL maelstrom && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter ;;
+     e|E|"") [ -e /usr/games/marsshooter ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && $APT_INSTALL marsshooter && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter ;;
+     f|F|"") [ -e ~/Downloads/tbftss-1.5.0/tbftss ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo && [ -e ~/Downloads/tbftss-1.5.0.linux-x86_64.tar.gz ] && tar -vsxf tbftss-1.5.0.linux-x86_64.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Tdshooter || echo -e "$NOT_FOUND" && sleep 5 && https://parallelrealities.itch.io/tbftss-the-pandoran-war && Tdshooter ;;
+     z|Z|"") Arcade ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Tdshooter ;;
+   esac
+ }
+ 
 function Adventure() {
-clear && echo -e ''' -------------------------------
- {A}-> The Ur-Quan Masters
- {B}-> Vegan on a Desert Island
- {C}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} The Ur-Quan Masters \n {B} Vegan on a Desert Island \n
+ {Z} Retornar ao menu anterior \n"
  echo -n " => Escolha uma das opções: "
    read -n1 AVENTURA && echo
 
    case $AVENTURA in
-     a|A|"") [ -e /usr/games/uqm ] && echo -e '''\n  The Ur-Quan Masters \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Adventure || echo && sudo apt install uqm && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Adventure ;;
-     b|B|"") sudo apt install snapd && echo && sudo snap install solarus && cd /home/$USER && echo && wget https://gitlab.com/voadi/voadi/-/archive/master/voadi-master.zip && echo && unzip voadi-master.zip && rm -rf voadi-master.zip && echo -e '''\n  Processo de instalação concluído!
-
-  Para jogar, siga os passos:
-  1º -> Abra o \033[46mSolarus Quest Launcher\033[0m;
-  2º -> Clique no botão \033[1mAdd quest\033[0m e selecione o diretório 
-  /home/$USER/voadi-master;
-  3º -> Selecione o arquivo \033[46mquest.dat\033[0m e clique em \033[1mOpen\033[0m;
-  4º -> Por fim, clique no botão \033[1mPlay\033[0m para iniciar o jogo.\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Adventure ;;
-     c|C|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Adventure ;;
+     a|A|"") [ -e /usr/games/uqm ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Adventure || echo && $APT_INSTALL uqm && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Adventure ;;
+     b|B|"") $APT_INSTALL snapd && echo && sudo snap install solarus && cd /home/$USER && echo && wget https://gitlab.com/voadi/voadi/-/archive/master/voadi-master.zip && echo && unzip voadi-master.zip && rm -rf voadi-master.zip && echo -e "$COMPLETED \n  Para jogar, siga os passos: \n  1º -> Abra o \033[46mSolarus Quest Launcher\033[0m; \n  2º -> Clique no botão \033[1mAdd quest\033[0m e selecione o diretório \n  /home/$USER/voadi-master; \n  3º -> Selecione o arquivo \033[46mquest.dat\033[0m e clique em \033[1mOpen\033[0m; 4º -> Por fim, \n  clique no botão \033[1mPlay\033[0m para iniciar o jogo. \n" && read -n1 -s -p "$CONTINUE" && Adventure ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Adventure ;;
    esac
 }
 
 function Educ() {
-clear && echo -e ''' ----------------------------------
- {A}-> Gcompris (suíte educacional)
- {B}-> História e Geografia
- {C}-> Laboratório de Ciências
- {D}-> Programação de software
- {E}-> Retornar ao menu anterior
- ---------------------------------- \n'''
+clear && echo -e "\n {A} Gcompris (suíte educacional) \n {B} História e Geografia
+ {C} Laboratório de Ciências \n {D} Programação de software \n
+ {Z} Retornar ao menu anterior \n"
  echo -n " => Escolha uma das opções: "
    read -n1 OPTIONEDU && echo
 
    case $OPTIONEDU in
-     a|A|"") [ -e /usr/games/gcompris-qt ] && echo -e '''\n  Gcompris \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Educ || echo && sudo apt install gcompris && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && Educ ;;
+     a|A|"") [ -e /usr/games/gcompris-qt ] && echo -e "\n  Gcompris está instalado! \n" && read -n1 -s -p "$CONTINUE" && Educ || echo && $APT_INSTALL gcompris && echo && read -n1 -s -p "$CONTINUE" && Educ ;;
      b|B|"") HistGeo ;;
      c|C|"") Lab ;;
      d|D|"") Progame ;;
-     e|E|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Educ ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Educ ;;
    esac
  }
 
 function HistGeo() {
-clear && echo -e ''' --------------------------------------------------
- {A}-> Cultivation (simulação social)
- {B}-> KGeography (mapas)
- {C}-> Tux4You Genesis (história do software livre)
- {D}-> Retornar ao menu anterior
- ---------------------------------------------------\n'''
+clear && echo -e "\n {A} Cultivation (simulação social) \n {B} KGeography (mapas)
+ {C} Tux4You Genesis (história do software livre) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 DIMENSAO && echo
 
    case $DIMENSAO in
-     a|A|"") [ -e /usr/games/Cultivation ] && echo -e '''\n  Cultivation \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo || echo && sudo apt install cultivation && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo ;;
-     b|B|"") [ -e /usr/share/kgeography ] && echo -e '''\n  KGeography \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo || echo && sudo apt install kgeography && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo ;;
-     c|C|"") [ -e /home/$USER/Downloads/Genesis-linux-mac/rpgboss ] && echo -e '''\n  O diretório do jogo Tux4You Genesis \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo || [ -e /home/$USER/Downloads/Genesis-linux-mac.tar ] && tar -xvf Genesis-linux-mac.tar && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && HistGeo || echo -e '''\n  O arquivo \033[46mGenesis-linux-mac.tar\033[0m \033[5mnão\033[0m foi baixado!
- 
-  Por favor, baixe o arquivo na página que abrirá em seu navegador.\n''' && sleep 5 && firefox https://mega.nz/#!HWgllKqC!iHTzoxYx6gYOcBbDQVX00XlTbAF23c3klcrxmArZ4Tg && HistGeo ;;
-     d|D|"") Educ ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && HistGeo ;;
+     a|A|"") [ -e /usr/games/Cultivation ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && HistGeo || echo && $APT_INSTALL cultivation && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && HistGeo ;;
+     b|B|"") [ -e /usr/share/kgeography ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && HistGeo || echo && $APT_INSTALL kgeography && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && HistGeo ;;
+     c|C|"") [ -e ~/Downloads/Genesis-linux-mac/rpgboss ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && HistGeo || [ -e ~/Downloads/Genesis-linux-mac.tar ] && tar -xvf Genesis-linux-mac.tar && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && HistGeo || echo -e "$NOT_FOUND" && sleep 5 && firefox https://mega.nz/#!HWgllKqC!iHTzoxYx6gYOcBbDQVX00XlTbAF23c3klcrxmArZ4Tg && HistGeo ;;
+     z|Z|"") Educ ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && HistGeo ;;
    esac
  }
 
 function Lab() {
-clear && echo -e ''' --------------------------------
- {A}-> 4D Maze Game
- {B}-> Biogenesis
- {C}-> The Powder Toy
- {D}-> Retornar ao menu anterior
- --------------------------------\n'''
+clear && echo -e "\n {A} 4D Maze Game \n {B} Biogenesis \n {C} The Powder Toy \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 SCIENCE && echo
 
    case $SCIENCE in
-     a|A|"") [ -e /home/$USER/Downloads/maze-2008-exe.jar ] && echo -e '''\n  O arquivo do jogo The Powder Toy \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab || echo && cd /home/$USER/Downloads && wget https://github.com/willianlycan/utilitarios/raw/master/maze-2008-exe.jar && echo -e '''\n  Download do jogo concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab ;;
-     b|B|"") [ -e /home/$USER/Downloads/Biogenesis/ColorMod_1_88 ] && echo -e '''\n  O diretório do jogo Biogenesis \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab || echo && [ -e /home/$USER/Downloads/biogenesis_jar_0_9\ Mods_v11.zip ] && cd /home/$USER/Downloads && mkdir Biogenesis && mv /home/$USER/Downloads/biogenesis_jar_0_9\ Mods_v11.zip /home/$USER/Downloads/Biogenesis && cd Biogenesis && unzip biogenesis_jar_0_9\ Mods_v11.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab || cd /home/$USER/Downloads && wget https://sourceforge.net/projects/biogenesis/files/biogenesis/0.9/biogenesis_jar_0_9%20Mods_v11.zip && mkdir Biogenesis && mv /home/$USER/Downloads/biogenesis_jar_0_9\ Mods_v11.zip /home/$USER/Downloads/Biogenesis && cd Biogenesis && unzip biogenesis_jar_0_9\ Mods_v11.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab ;;
-     c|C|"") [ -e /home/$USER/Downloads/The_Powder_Toy/powder64 ] && echo -e '''\n  O diretório do jogo The Powder Toy \033[5mestá em /Downloads!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab || echo && [ -e /home/$USER/Downloads/powder-lin64.zip ] && cd /home/$USER/Downloads && mkdir The_Powder_Toy && mv /home/$USER/Downloads/powder-lin64.zip /home/$USER/Downloads/The_Powder_Toy && cd The_Powder_Toy && unzip powder-lin64.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab || cd /home/$USER/Downloads && wget https://powdertoy.co.uk/Download/powder-lin64.zip && mkdir The_Powder_Toy && mv /home/$USER/Downloads/powder-lin64.zip /home/$USER/Downloads/The_Powder_Toy && cd The_Powder_Toy && unzip powder-lin64.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Lab ;;
-     d|D|"") Educ ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Lab ;;
+     a|A|"") [ -e ~/Downloads/maze-2008-exe.jar ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Lab || echo && cd ~/Downloads && wget https://github.com/willianlycan/utilitarios/raw/master/maze-2008-exe.jar && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Lab ;;
+     b|B|"") [ -e ~/Downloads/Biogenesis/ColorMod_1_88 ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Lab || echo && [ -e ~/Downloads/biogenesis_jar_0_9\ Mods_v11.zip ] && cd ~/Downloads && mkdir Biogenesis && mv ~/Downloads/biogenesis_jar_0_9\ Mods_v11.zip ~/Downloads/Biogenesis && cd Biogenesis && unzip biogenesis_jar_0_9\ Mods_v11.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Lab || cd ~/Downloads && wget https://sourceforge.net/projects/biogenesis/files/biogenesis/0.9/biogenesis_jar_0_9%20Mods_v11.zip && mkdir Biogenesis && mv ~/Downloads/biogenesis_jar_0_9\ Mods_v11.zip ~/Downloads/Biogenesis && cd Biogenesis && unzip biogenesis_jar_0_9\ Mods_v11.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Lab ;;
+     c|C|"") [ -e ~/Downloads/The_Powder_Toy/powder64 ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Lab || echo && [ -e ~/Downloads/powder-lin64.zip ] && cd ~/Downloads && mkdir The_Powder_Toy && mv ~/Downloads/powder-lin64.zip ~/Downloads/The_Powder_Toy && cd The_Powder_Toy && unzip powder-lin64.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Lab || cd ~/Downloads && wget https://powdertoy.co.uk/Download/powder-lin64.zip && mkdir The_Powder_Toy && mv ~/Downloads/powder-lin64.zip ~/Downloads/The_Powder_Toy && cd The_Powder_Toy && unzip powder-lin64.zip && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Lab ;;
+     z|Z|"") Educ ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Lab ;;
    esac
  }
 
 function Progame() {
-clear && echo -e ''' --------------------------------
- {A}-> Colobot: Golden Edition
- {B}-> Retornar ao menu anterior
- --------------------------------\n'''
+clear && echo -e "\n     \033[1mColobot: Golden Edition\033[0m \n \n {A} Instalar \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 PROGAMER && echo
 
    case $PROGAMER in
-     a|A|"") [ -e /usr/games/colobot ] && echo -e '''\n  Colobot: Golden Edition \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Progame || echo && sudo apt install colobot* && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Progame ;;
-     b|B|"") Educ ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Progame ;;
+     a|A|"") [ -e /usr/games/colobot ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Progame || echo && $APT_INSTALL colobot* && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Progame ;;
+     z|Z|"") Educ ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Progame ;;
    esac
  }
 
+function Esportes() {
+clear && echo -e "\n {A} BillardGL (bilhar) \n {B} Neverputt (golfe) \n {C} YSoccer (futebol) \n
+ {Z} Retornar ao menu anterior \n"
+  echo -n " => Escolha uma das opções: "
+   read -n1 SPORTS && echo
+
+   case $SPORTS in
+     a|A|"") [ -e /usr/games/billard-gl ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Arcade || echo && sudo apt install billard-gl && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Arcade ;;
+     b|B|"") [ -e /usr/games/neverputt ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Esportes || echo && sudo apt install neverputt && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Esportes ;;
+     c|C|"") [ -e ~/Downloads/ysoccer19_linux64/ysoccer ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Esportes || echo && [ -e ~/Downloads/ysoccer19_linux64.tar.gz ] && cd ~/Downloads && tar -vzxf ysoccer19_linux64.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Esportes || cd ~/Downloads && wget https://sourceforge.net/projects/ysoccer/files/YSoccer19/ysoccer19_linux64.tar.gz && tar -vzxf ysoccer19_linux64.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Esportes ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Esportes ;;
+   esac
+ }
+ 
 function Estrategia() {
-clear && echo -e ''' -------------------------------
- {A}-> Baralho
- {B}-> RTS
- {C}-> Tabuleiro
- {D}-> TBS
- {E}-> Retornar ao menu anterior
- ------------------------------- \n'''
+clear && echo -e "\n {A} Baralho \n {B} RTS
+ {C} Tabuleiro \n {D} TBS \n {E} Tower defense \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 ESTRATOSFERA && echo
 
@@ -332,410 +373,295 @@ clear && echo -e ''' -------------------------------
      b|B|"") Realtime ;;
      c|C|"") BoardGame ;;
      d|D|"") Turned ;;
-     e|E|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Estrategia ;;
+     e|E|"") Defender ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Estrategia ;;
    esac
  }
 
 function CardGame() {
-clear && echo -e ''' -------------------------------
- {A}-> Magarena
- {B}-> PySol Fan Club Edition
- {C}-> Retornar ao menu anterior
- ------------------------------- \n'''
+clear && echo -e "\n {A} Magarena \n {B} PySol Fan Club Edition \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 CARDS && echo
 
    case $CARDS in
-     a|A|"") [ -e /home/$USER/Games/magarena/Magarena.sh ] && echo -e '''\n  Magarena \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && CardGame || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/magarena && CardGame ;;
-     b|B|"") [ -e /usr/games/pysolfc ] && echo -e '''\n  PySol Fan Club Edition \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && CardGame || echo && sudo apt install pysolfc && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && CardGame ;;
-     c|C|"") Estrategia ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && CardGame ;;
+     a|A|"") [ -e ~/Games/magarena/Magarena.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && CardGame || echo -e "$SELECT" && sleep 5 && lutris install/magarena && CardGame ;;
+     b|B|"") [ -e /usr/games/pysolfc ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && CardGame || echo && $APT_INSTALL pysolfc && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && CardGame ;;
+     z|Z|"") Estrategia ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && CardGame ;;
    esac
  }
 
 function Realtime() {
-clear && echo -e ''' -------------------------------
- {A}-> 0 A.D.
- {B}-> Annex: Conquer the World
- {C}-> Bos Wars
- {D}-> Gigalomania
- {E}-> Globulation 2 
- {F}-> MegaGlest
- {G}-> OpenDungeons
- {H}-> Open Imperium Galactica
- {I}-> OpenRA
- {J}-> Warzone 2100
- {K}-> Widelands
- {L}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} 0 A.D. \n {B} Annex: Conquer the World \n {C} Bos Wars
+ {D} Gigalomania \n {E} Globulation 2 \n {F} MegaGlest
+ {G} OpenDungeons \n {H} Open Imperium Galactica \n {I} OpenRA
+ {J} Tribal Trouble \n {K} Warzone 2100 \n {L} Widelands \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 REAL && echo
 
    case $REAL in
-     a|A|"") [ -e /usr/games/0ad ] && echo -e '''\n  0 A.D \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install 0ad && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     b|B|"") [ -e /home/$USER/Games/annex-conquer-the-world/annex ] && echo -e '''\n  Annex: Conquer the World \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/annex-conquer-the-world && Realtime ;;
-     c|C|"") [ -e /usr/games/boswars ] && echo -e '''\n  Bos Wars \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install boswars && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     d|D|"") [ -e /home/$USER/Downloads/gigalomaniasrc.zip ] && sudo apt-get install make && sudo apt-get install g++ && sudo apt-get install libsdl2-dev && sudo apt-get install libsdl2-image-dev && sudo apt-get install libsdl2-mixer-dev && [ -e /home/$USER/Downloads/gigalomaniasrc.zip ] && cd /home/$USER/Downloads && unzip gigalomaniasrc.zip && cd /home/$USER/Downloads/gigalomaniasrc && sudo make install && sleep 3 && Realtime || echo -e '''\n  O arquivo \033[46mgigalomaniasrc.zip\033[0m \033[5mnão\033[0m foi baixado!
- 
-  Por favor, baixe o arquivo na página que abrirá em seu navegador.\n''' && sleep 5 && firefox http://launchpad.net/gigalomania/trunk/1.0.1/+download/gigalomaniasrc.zip && Realtime ;;
-     e|E|"") [ -e /usr/games/glob2 ] && echo -e "\n  Globulation 2 \033[5mestá instalado!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install glob2 && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     f|F|"") [ -e /usr/games/megaglest ] && echo -e '''\n  MegaGlest \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install megaglest && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     g|G|"") [ -e /home/$USER/Games/opendungeons/opendungeons.x86_64 ] && echo -e '''\n  OpenDungeons \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/opendungeons && Realtime ;;
-     h|H|"") [ -e /home/$USER/Downloads/open-ig-launcher.jar ] && echo -e '''\n  O arquivo \033[46mopen-ig-launcher.jar\033[0m está no diretório \033[46m/Downloads\033[0m! \n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo -e '''\n  O arquivo \033[46mopen-ig-launcher.jar\033[0m \033[5mnão\033[0m foi baixado! 
-     
-  Por favor, baixe o arquivo na página que abrirá em seu navegador.\n''' && sleep 5 && firefox https://github.com/akarnokd/open-ig/raw/master/open-ig-launcher.jar && Realtime ;;
-     i|I|"") [ -e /home/$USER/Games/openra/OpenRA-Red-Alert-x86_64.AppImage ] && echo -e '''\n  OpenRA \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/openra && Realtime ;;
-     j|J|"") [ -e /usr/games/warzone2100 ] && echo -e '''\n  Warzone 2100 \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install warzone2100 && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     k|K|"") [ -e /usr/games/widelands ] && echo -e '''\n  Widelands \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime || echo && sudo apt install widelands && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Realtime ;;
-     l|L|"") Estrategia ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Realtime ;;
+     a|A|"") [ -e /usr/games/0ad ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL 0ad && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     b|B|"") [ -e ~/Games/annex-conquer-the-world/annex ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo -e "$SELECT" && sleep 3 && lutris install/annex-conquer-the-world && Realtime ;;
+     c|C|"") [ -e /usr/games/boswars ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL boswars && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     d|D|"") [ -e /opt/gigalomania/gigalomania ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || [ -e ~/Downloads/gigalomaniasrc.zip ] && $APT_INSTALL make && $APT_INSTALL g++ && $APT_INSTALL libsdl2-dev && $APT_INSTALL libsdl2-image-dev && $APT_INSTALL libsdl2-mixer-dev && cd ~/Downloads && unzip gigalomaniasrc.zip && cd ~/Downloads/gigalomaniasrc && sudo make install && sleep 3 && Realtime || echo -e "$NOT_FOUND" && sleep 5 && firefox http://launchpad.net/gigalomania/trunk/1.0.1/+download/gigalomaniasrc.zip && Realtime ;;
+     e|E|"") [ -e /usr/games/glob2 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL glob2 && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     f|F|"") [ -e /usr/games/megaglest ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL megaglest && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     g|G|"") [ -e ~/Games/opendungeons/opendungeons.x86_64 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo -e "$SELECT" && sleep 3 && lutris install/opendungeons && Realtime ;;
+     h|H|"") [ -e ~/Downloads/open-ig-launcher.jar ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Realtime || echo -e "$NOT_FOUND" && sleep 5 && firefox https://github.com/akarnokd/open-ig/raw/master/open-ig-launcher.jar && Realtime ;;
+     i|I|"") [ -e ~/Games/openra/OpenRA-Red-Alert-x86_64.AppImage ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo -e "$SELECT" && sleep 3 && lutris install/openra && Realtime ;;
+     j|J|"") [ -e ~/Downloads/TribalTroubleSetup.sh ] && echo -e "$WHEREISIT /Downloads! \n" && read -n1 -s -p "$CONTINUE" && Realtime || echo && cd ~/Downloads && wget https://github.com/sunenielsen/tribaltrouble/raw/master/binaries/TribalTroubleSetup.sh && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     k|K|"") [ -e /usr/games/warzone2100 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL warzone2100 && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     l|L|"") [ -e /usr/games/widelands ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL widelands && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Realtime ;;
+     z|Z|"") Estrategia ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Realtime ;;
    esac
  }
  
 function BoardGame() {
-clear && echo -e ''' ----------------------------------
- {A}-> Domination (Risk Board Game)
- {B}-> GNU Go
- {C}-> TripleA
- {D}-> Xboard (Xadrez)
- {E}-> Retornar ao menu anterior
- ----------------------------------\n'''
+clear && echo -e "\n {A} Domination (Risk Board Game)
+ {B} GNU Go \n {C} TripleA \n {D} Xboard (Xadrez) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 BOARD && echo
 
    case $BOARD in
-     a|A|"") [ -e /home/$USER/Domination/run.sh ] && echo -e "\n  O diretório do jogo Domination (Risk Board Game) \033[5mestá em /home/$USER!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || echo && [ -e /home/$USER/Downloads/Domination_install_1.2.1.jar ] && cd /home/$USER/Downloads && java -jar Domination_install_1.2.1.jar && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || echo && cd /home/$USER/Downloads && wget https://sourceforge.net/projects/domination/files/Domination/1.2.1/Domination_install_1.2.1.jar && java -jar Domination_install_1.2.1.jar && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame ;;
-     b|B|"") [ -e /usr/games/gnugo ] && echo -e '''\n  GNU Go \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || echo && sudo apt install gnugo && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame ;;
-     c|C|"") [ -e /home/$USER/TripleA/TripleA ] && echo -e "\n  O diretório do jogo TripleA \033[5mestá em /home/$USER!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || echo && [ -e /home/$USER/Downloads/TripleA_1.9.0.0.13066_unix.sh ] && cd /home/$USER/Downloads && chmod +x TripleA_1.9.0.0.13066_unix.sh && sudo apt install openjdk-8-jre && ./TripleA_1.9.0.0.13066_unix.sh && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || cd /home/$USER/Downloads && wget https://github.com/triplea-game/triplea/releases/download/1.9.0.0.13066/TripleA_1.9.0.0.13066_unix.sh && chmod +x TripleA_1.9.0.0.13066_unix.sh && sudo apt install openjdk-8-jre && ./TripleA_1.9.0.0.13066_unix.sh && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame ;;
-     d|D|"") [ -e /usr/games/xboard ] && echo -e '''\n  Xboard \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame || echo && sudo apt install xboard && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && BoardGame ;;
-     e|E|"") Estrategia ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && BoardGame ;;
+     a|A|"") [ -e ~/Domination/run.sh ] && echo -e "$WHEREISIT /home/$USER! \n" && read -n1 -s -p "$CONTINUE" && BoardGame || echo && [ -e ~/Downloads/Domination_install_1.2.1.jar ] && cd ~/Downloads && java -jar Domination_install_1.2.1.jar && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame || echo && cd ~/Downloads && wget https://sourceforge.net/projects/domination/files/Domination/1.2.1/Domination_install_1.2.1.jar && java -jar Domination_install_1.2.1.jar && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame ;;
+     b|B|"") [ -e /usr/games/gnugo ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && BoardGame || echo && $APT_INSTALL gnugo && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame ;;
+     c|C|"") [ -e ~/TripleA/TripleA ] && echo -e "$WHEREISIT /home/$USER! \n" && read -n1 -s -p "$CONTINUE" && BoardGame || echo && [ -e ~/Downloads/TripleA_1.9.0.0.13066_unix.sh ] && cd ~/Downloads && chmod +x TripleA_1.9.0.0.13066_unix.sh && $APT_INSTALL openjdk-8-jre && ./TripleA_1.9.0.0.13066_unix.sh && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame || cd ~/Downloads && wget https://github.com/triplea-game/triplea/releases/download/1.9.0.0.13066/TripleA_1.9.0.0.13066_unix.sh && chmod +x TripleA_1.9.0.0.13066_unix.sh && $APT_INSTALL openjdk-8-jre && ./TripleA_1.9.0.0.13066_unix.sh && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame ;;
+     d|D|"") [ -e /usr/games/xboard ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && BoardGame || echo && $APT_INSTALL xboard && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && BoardGame ;;
+     z|Z|"") Estrategia ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && BoardGame ;;
    esac
  }
  
 function Turned() {
-clear && echo -e ''' -------------------------------
- {A}-> Freeciv
- {B}-> FreeOrion 
- {C}-> The Battle for Wesnoth
- {D}-> UFO: Alien Invasion
- {E}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} Freeciv \n {B} FreeOrion \n {C} MegaMek
+ {D} The Battle for Wesnoth \n {E} UFO: Alien Invasion \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 TURNO && echo
 
    case $TURNO in
-     a|A|"") [ -e /usr/games/freeciv ] && echo -e '''\n  Freeciv \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned || echo && sudo apt install freeciv && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned ;;
-     b|B|"") [ -e /usr/games/freeorion ] && echo -e '''\n  FreeOrion \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned || echo && sudo apt install freeorion && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned ;;
-     c|C|"") [ -e /usr/games/wesnoth ] && echo -e '''\n  The Battle for Wesnoth \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned || echo && sudo apt install wesnoth && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned ;;
-     d|D|"") [ -e /usr/games/ufoai ] && echo -e '''\n  UFO: Alien Invasion \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned || echo && sudo apt install ufoai && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Turned ;;
-     e|E|"") Estrategia ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Turned ;;
+     a|A|"") [ -e /usr/games/freeciv ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Turned || echo && $APT_INSTALL freeciv && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned ;;
+     b|B|"") [ -e /usr/games/freeorion ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Turned || echo && $APT_INSTALL freeorion && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned ;;
+     c|C|"") [ -e ~/Downloads/mekhq-0.46.1/MegaMek.jar ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Turned || echo && [ -e ~/Downloads/mekhq-0.46.1.tar.gz ] && cd ~/Downloads && tar -vsxf mekhq-0.46.1.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned || echo && cd ~/Downloads && wget https://github.com/MegaMek/mekhq/releases/download/v0.46.1/mekhq-0.46.1.tar.gz && tar -vsxf mekhq-0.46.1.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned ;;
+     d|D|"") [ -e /usr/games/wesnoth ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Turned || echo && $APT_INSTALL wesnoth && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned ;;
+     e|E|"") [ -e /usr/games/ufoai ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Turned || echo && $APT_INSTALL ufoai && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Turned ;;
+     z|Z|"") Estrategia ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Turned ;;
    esac
  }
  
-function MultiOn() {
-clear && echo -e ''' --------------------------------
- {A}-> FPS multiplayer
- {B}-> FPS + RTS multiplayer 
- {C}-> MMORPG
- {D}-> Retornar ao menu principal
- --------------------------------\n'''
-  echo -n " => Escolha uma das opções: "
-   read -n1 OPTIONMO && echo
-
-   case $OPTIONMO in
-     a|A|"") Fpson ;;
-     b|B|"") Fpsgs ;;
-     c|C|"") Mmorpg ;;
-     d|D|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && MultiOn ;;
-   esac
- }
-
-function Fpson() {
-clear && echo -e ''' -----------------------------------
- {A}-> Alien Arena
- {B}-> AssaultCube Reloaded
- {C}-> Cube 2: Sauerbraten
- {D}-> Nexuiz
- {E}-> OpenArena
- {F}-> Red Eclipse
- {G}-> Uebergame
- {H}-> Urban Terror
- {I}-> Warsow
- {J}-> Wolfenstein: Enemy Territory
- {K}-> Xonotic
- {L}-> Retornar ao menu anterior
- -----------------------------------\n'''
+function Defender() {
+clear && echo -e "\n     \033[1mMindustry\033[0m \n \n {A} Instalação via Lutris \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Esolha uma das opções: "
-   read -n1 FPSY && echo
+   read -n1 TDEF && echo
    
-   case $FPSY in
-     a|A|"") [ -e /usr/games/alien-arena ] && echo -e '''\n  UFO: Alien Arena \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && sudo apt install alien-arena && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     b|B|"") [ -e /home/$USER/Games/assaultcube-reloaded/client.sh ] && echo -e '''\n  AssaultCube Reloaded \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/assaultcube-reloaded && Fpson ;;
-     c|C|"") [ -e /home/$USER/Games/sauerbraten-cube-2/sauerbraten_unix ] && echo -e '''\n  Cube 2: Sauerbraten \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/sauerbraten-cube-2 && Fpson ;;
-     d|D|"") [ -e /usr/games/nexuiz ] && echo -e '''\n  UFO: Nexuiz \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && sudo apt install nexuiz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     e|E|"") [ -e /home/$USER/Games/openarena/openarena.x86_64 ] && echo -e '''\n  OpenArena \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/openarena && Fpson ;;
-     f|F|"") [ -e /usr/games/redeclipse ] && echo -e '''\n  UFO: Red Eclipse \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && sudo apt install redeclipse && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     g|G|"") [ -e /home/$USER/Downloads/Uebergame-1.1.2.0.zip/Uebergame-1.1.2.0/Uebergame ] && echo -e "\n  O diretório do jogo Uebergame \033[5mestá em /Downloads!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && [ -e /home/$USER/Downloads/Uebergame-1.1.2.0.zip ] && cd /home/$USER/Downloads && unzip Uebergame-1.1.2.0.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && cd /home/$USER/Downloads && wget https://duion.com/files/games Uebergame-1.1.2.0.zip && unzip Uebergame-1.1.2.0.zip && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     h|H|"") [ -e /home/$USER/Games/urban-terror/prefix/drive_c/Program Files/Urban Terror/Quake3-UrT.exe ] && echo -e '''\n  Urban Terror \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/urban-terror && Fpson ;;
-     i|I|"") [ -e /home/$USER/Downloads/warsow-2.1.2/warsow ] && echo -e "\n  O diretório do jogo Warsow \033[5mestá em /home/$USER!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && [ -e /home/$USER/Downloads/warsow-2.1.2.tar.gz ] && cd /home/$USER/Downloads && tar -vzxf warsow-2.1.2.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && cd /home/$USER/Downloads && wget http://warsow.net/warsow-2.1.2.tar.gz && tar -vzxf warsow-2.1.2.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     j|J|"") [ -e /usr/local/games/enemy-territory/et ] && echo -e "\n  O diretório do jogo Wolfenstein: Enemy Territory \033[5mestá em /usr/local/games!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && [ -e /home/$USER/Downloads/et260b.x86_full.zip ] && cd /home/$USER/Downloads && unzip et260b.x86_full.zip && sudo apt install sntp && echo && sudo ./et260b.x86_keygen_V03.run && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo && cd /home/$USER/Downloads && wget https://cdn.splashdamage.com/downloads/games/wet/et260b.x86_full.zip && unzip et260b.x86_full.zip && sudo apt install sntp && echo && sudo ./et260b.x86_keygen_V03.run && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson ;;
-     k|K|"") [ -e /home/$USER/Games/xonotic/xonotic-linux-glx.sh ] && echo -e '''\n  Xonotic \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpson || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/xonotic && Fpson ;;
-     l|L|"") MultiOn ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Fpson ;;
+   case $TDEF in
+     a|A|"") [ -e ~/Games/mindustry/start.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Defender || echo -e "$SELECT" && sleep 3 && lutris install/mindustry && Defender ;;
+     z|Z|"") Estrategia ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Defender ;;
    esac
  }
-
+ 
 function Fpsgs() {
-clear && echo -e ''' -------------------------------
- {A}-> Savage XR
- {B}-> Unvanquished
- {C}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} Savage XR \n {B} Unvanquished \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Esolha uma das opções: "
    read -n1 RTSS && echo
 
    case $RTSS in
-     a|A|"") [ -e /home/$USER/savage-xr/savage.sh ] && echo -e "\n  O jogo Savage XR \033[5mestá instalado!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpsgs || echo && [ -e /home/$USER/Downloads/xr_setup-1.0-cl_lin_prod.bin ] && cd ~/Downloads && chmod +x xr_setup-1.0-cl_lin_prod.bin && ./xr_setup-1.0-cl_lin_prod.bin && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpsgs || echo -e '''\n  O arquivo \033[46mxr_setup-1.0-cl_lin_prod.bin\033[0m \033[5mnão\033[0m foi baixado!
-
-  Por favor, baixe o arquivo na página que abrirá 
-  em seu navegador.\n''' && sleep 5 && firefox https://savagexr.com/download.html && Fpsgs ;;
-     b|B|"") [ -e /home/$USER/Games/unvanquished/daemon ] && echo -e '''\n  Unvanquished \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Fpsgs || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/unvanquished && Fpsgs ;;
-     c|C|"") MultiOn ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Fpsgs ;;
+     a|A|"") [ -e ~/.wine/drive_c/Program\ Files\ \(x86\)/Savage\ XR ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpsgs || echo && [ -e ~/Downloads/xr_setup-1.0-cl_win_prod.exe ] && cd ~/Downloads && wine xr_setup-1.0-cl_win_prod.exe && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Fpsgs || echo -e "$NOT_FOUND" && sleep 5 && firefox https://savagexr.com/thankyou_windows_newerth_de.html && Fpsgs ;;
+     b|B|"") [ -e ~/Games/unvanquished/daemon ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Fpsgs || echo -e "$SELECT" && sleep 5 && lutris install/unvanquished && Fpsgs ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Fpsgs ;;
    esac
  }
  
 function Mmorpg() {
-clear && echo -e ''' -------------------------------
- {A}-> Albion Online
- {B}-> Crossfire
- {C}-> Daimonin
- {D}-> Deliantra
- {E}-> PlaneShift 
- {F}-> RuneLite
- {G}-> Stendhal
- {H}-> The Mana World
- {I}-> Retornar ao menu anterior
- -------------------------------\n'''
+clear && echo -e "\n {A} Albion Online \n {B} Crossfire \n {C} Daimonin \n {D} Deliantra 
+ {E} PlaneShift \n {F} RuneLite \n {G} Stendhal \n {H} The Mana World \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Esolha uma das opções: "
    read -n1 MMORPGX && echo
    
    case $MMORPGX in
-     a|A|"") [ -e /home/$USER/Games/albion-online/data/Albion-Online ] && echo -e '''\n  Albion Online \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/freedroidrpg && Mmorpg ;;
-     b|B|"") [ -e /usr/games/crossfire-client-gtk2 ] && echo -e '''\n  Crossfire \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo && sudo apt install crossfire-client && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg ;;
-     c|C|"") [ -e /home/$USER/Downloads/daimonin_client/daimonin ] && echo -e "\n  O jogo Daimonin \033[5mestá instalado!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo && [ -e /home/$USER/Downloads/Daimonin-installer-20150112.run ] && cd ~/Downloads && chmod +x Daimonin-installer-20150112.run && ./Daimonin-installer-20150112.run && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo -e '''\n  O arquivo \033[46mgigalomaniasrc.zip\033[0m \033[5mnão\033[0m foi baixado!
- 
-  Por favor, baixe o arquivo na página que abrirá 
-  em seu navegador.\n''' && sleep 5 && firefox https://www.daimonin.org/downloads/sa/downfile/id/5/ && Mmorpg ;;
-     d|D|"") [ -e /home/$USER/Downloads/deliantra-gnu-linux-amd64 ] && echo -e "\n  O jogo Deliantra \033[5mestá em /Downloads!\033[0m\n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo && [ -e /home/$USER/Downloads/deliantra-gnu-linux-amd64.tar.gz ] && cd /home/$USER/Downloads && tar -vzxf deliantra-gnu-linux-amd64.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo && cd /home/$USER/Downloads && wget http://dist.schmorp.de/deliantra/ota/deliantra-gnu-linux-amd64.tar.gz && tar -vzxf deliantra-gnu-linux-amd64.tar.gz && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg ;;
-     e|E|"") firefox http://www.planeshift.it && Mmorpg ;;
-     f|F|"") [ -e /home/$USER/Downloads/RuneLite.AppImage ] && cd ~/Downloads && chmod +x RuneLite.AppImage && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || cd ~/Downloads && echo && wget https://github.com/runelite/launcher/releases/download/2.1.0/RuneLite.AppImage && chmod +x RuneLite.AppImage && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg ;;
-     g|G|"") [ -e /home/$USER/Games/stendhal/start.sh ] && echo -e '''\n  Stendhal \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/stendhal && Mmorpg ;;
-     h|H|"") [ -e /usr/games/manaplus ] && echo -e '''\n  ManaPlus (The Mana World) \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg || echo && sudo apt install manaplus && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Mmorpg ;;
-     i|I|"") MultiOn ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Mmorpg ;;
+     a|A|"") [ -e ~/Games/albion-online/data/Albion-Online ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo -e "$SELECT" && sleep 3 && lutris install/freedroidrpg && Mmorpg ;;
+     b|B|"") [ -e /usr/games/crossfire-client-gtk2 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && $APT_INSTALL crossfire-client && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg ;;
+     c|C|"") [ -e ~/Downloads/daimonin_client/daimonin ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && [ -e ~/Downloads/Daimonin-installer-20150112.run ] && cd ~/Downloads && chmod +x Daimonin-installer-20150112.run && ./Daimonin-installer-20150112.run && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo -e "$NOT_FOUND" && sleep 5 && firefox https://www.daimonin.org/downloads/sa/downfile/id/5/ && Mmorpg ;;
+     d|D|"") [ -e ~/Downloads/deliantra-gnu-linux-amd64 ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && [ -e ~/Downloads/deliantra-gnu-linux-amd64.tar.gz ] && cd ~/Downloads && tar -vzxf deliantra-gnu-linux-amd64.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && cd ~/Downloads && wget http://dist.schmorp.de/deliantra/ota/deliantra-gnu-linux-amd64.tar.gz && tar -vzxf deliantra-gnu-linux-amd64.tar.gz && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg ;;
+     e|E|"") [ -e ~/opt/PlaneShift/psclient ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && [ -e ~/Downloads/PlaneShift-v0.6.3-x64.run ] && cd ~/Downloads && chmod +x PlaneShift-v0.6.3-x64.run && sudo ./PlaneShift-v0.6.3-x64.run && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && cd ~/Downloads && wget http://ny01.linuxgamepanel.com/files/PlaneShift-v0.6.3-x64.run && chmod +x PlaneShift-v0.6.3-x64.run && sudo ./PlaneShift-v0.6.3-x64.run && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg ;;
+     f|F|"") [ -e ~/Downloads/RuneLite.AppImage ] && cd ~/Downloads && chmod +x RuneLite.AppImage && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg || cd ~/Downloads && echo && wget https://github.com/runelite/launcher/releases/download/2.1.0/RuneLite.AppImage && chmod +x RuneLite.AppImage && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg ;;
+     g|G|"") [ -e ~/Games/stendhal/start.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo -e "$SELECT" && sleep 5 && lutris install/stendhal && Mmorpg ;;
+     h|H|"") [ -e /usr/games/manaplus ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Mmorpg || echo && $APT_INSTALL manaplus && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Mmorpg ;;
+     z|Z|"") Menuini ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Mmorpg ;;
    esac
  }
 
 function RPG() {
-clear && echo -e ''' -------------------------------
- {A}-> Flare
- {B}-> FreeDink
- {C}-> Freedroid RPG
- {D}-> Roguelike (masmorra)
- {E}-> Retornar ao menu anterior
- ------------------------------- \n'''
+clear && echo -e "\n {A} Flare \n {B} FreeDink \n {C} Freedroid RPG \n {D} Roguelike (masmorra) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Esolha uma das opções: "
    read -n1 RPGX && echo
 
    case $RPGX in
-     a|A|"") [ -e /home/$USER/Games/flare/flare.sh ] && echo -e '''\n  Flare \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && RPG || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/flare && RPG ;;
-     b|B|"") [ -e /usr/games/freedink ] && echo -e '''\n  FreeDink \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && RPG || echo && sudo apt install freedink && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && RPG ;;
-     c|C|"") [ -e /home/$USER/Games/freedroidrpg/bin/freedroidRPG ] && echo -e '''\n  Freedroid RPG \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && RPG || echo -e '''\n  Selecione um instalador do jogo na plataforma \033[33mLutris\033[0m \n''' && sleep 3 && lutris install/freedroidrpg && RPG ;;
+     a|A|"") [ -e ~/Games/flare/flare.sh ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rpg || echo -e "$SELECT" && sleep 3 && lutris install/flare && Rpg ;;
+     b|B|"") [ -e /usr/games/freedink ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rpg || echo && sudo apt install freedink && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Rpg ;;
+     c|C|"") [ -e ~/Games/freedroidrpg/bin/freedroidRPG ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rpg || echo -e "$SELECT" && sleep 3 && lutris install/freedroidrpg && Rpg ;;
      d|D|"") Rogueliked ;;
-     e|E|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && RPG ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Rpg ;;
    esac
  }
 
 function Rogueliked() {
-clear && echo -e ''' --------------------------------
- {A}-> Cataclysm: Dark Days Ahead
- {B}-> Dungeon Crawl Stone Soup
- {C}-> Powder
- {D}-> RogueBox Adventures
- {E}-> Retornar ao menu anterior
- --------------------------------\n'''
+clear && echo -e "\n {A} Cataclysm: Dark Days Ahead \n {B} Dungeon Crawl Stone Soup
+ {C} Erebus \n {D} Pathos: Nethack Codex \n {E} Powder \n {F} RogueBox Adventures \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 ROGUE && echo
 
    case $ROGUE in
-     a|A|"") [ -e /usr/games/cataclysm ] && echo -e '''\n  Cataclysm: Dark Days Ahead \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked || echo && sudo apt install cataclysm-dda-* && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked ;;
-     b|B|"") [ -e /usr/games/crawl-tiles ] && echo -e '''\n  Dungeon Crawl Stone Soup \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked || echo && sudo apt install crawl* && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked ;;
-     c|C|"") [ -e /usr/games/powder ] && echo -e '''\n  Powder \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked || echo && sudo apt install powder && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked ;;
-     d|D|"") echo && sudo apt install python3 python3-pygame && [ -e /home/$USER/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit.zip ] && echo && unzip RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit.zip && echo && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked || echo -e '''\n  O arquivo \033[46mRogueBoxAdventures_v3_0_1_GNU+Linux_64Bit.zip\033[0m \033[5mnão\033[0m 
-  foi baixado! 
-     
-  Por favor, baixe o arquivo na página que abrirá em seu 
-  navegador.\n''' && sleep 3 && firefox https://themightyglider.itch.io/roguebox-adventures && read -n1 -s -p "  Pressione uma tecla para continuar..." && Rogueliked ;;
-     e|E|"") RPG ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Rogueliked ;;
+     a|A|"") [ -e /usr/games/cataclysm ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rogueliked || echo && $APT_INSTALL cataclysm-dda-* && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Rogueliked ;;
+     b|B|"") [ -e /usr/games/crawl-tiles ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rogueliked || echo && $APT_INSTALL crawl* && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Rogueliked ;;
+     c|C|"") [ -e ~/Downloads/erebussrc/erebus ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rogueliked || echo && $APT_INSTALL g++ libqt4-dev libsfml-dev && cd ~/Downloads/erebussrc && qmake erebus.pro && sudo make install && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Rogueliked ;;
+     d|D|"") [ -e ~/Games/pathos-nethack-codex/prefix/drive_c/Games/Pathos/PathosGame.exe ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rogueliked || echo -e "$SELECT" && sleep 3 && lutris install/pathos-nethack-codex && Rogueliked ;;
+     e|E|"") [ -e /usr/games/powder ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Rogueliked || echo && $APT_INSTALL powder && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Rogueliked ;;
+     f|F|"") echo && $APT_INSTALL python3 python3-pygame && [ -e ~/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit.zip ] && echo && unzip RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit.zip && echo && read -n1 -s -p "$CONTINUE" && Rogueliked || echo -e "$NOT_FOUND" && sleep 3 && firefox https://themightyglider.itch.io/roguebox-adventures && read -n1 -s -p "$CONTINUE" && Rogueliked ;;
+     z|Z|"") Rpg ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Rogueliked ;;
    esac
  }
  
 function Simuladores() {
-clear && echo -e ''' --------------------------------------------
- {A}-> Flightgear (simulador de vôo)
- {B}-> Opencity (simulador de cidade)
- {C}-> OpenSSN (simulador de submarino)
- {D}-> OpenTTD (simulador de transportes)
- {E}-> Simulatrans (simulador de transportes) 
- {F}-> Speed Dreams (simulador de motorsport)
- {G}-> Retornar ao menu anterior
- --------------------------------------------\n'''
+clear && echo -e "\n {A} Flightgear (simulador de vôo) \n {B} Opencity (simulador de cidade)
+ {C} OpenSSN (simulador de submarino) \n {D} OpenTTD (simulador de transportes)
+ {E} Simulatrans (simulador de transportes) \n {F} Speed Dreams (simulador de motorsport) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 SIM && echo
 
    case $SIM in
-     a|A|"") [ -e /usr/games/fgfs ] && echo -e '''\n  Flightgear \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo && sudo apt install flightgear && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     b|B|"") [ -e /usr/games/opencity ] && echo -e '''\n  Opencity \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo && sudo apt install opencity && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     c|C|"") [ -e /usr/games/openssn ] && echo -e '''\n  OpenSSN \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo && sudo apt install openssn && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     d|D|"") [ -e /usr/games/openttd ] && echo -e '''\n  OpenTTD \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo && sudo apt install openttd && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     e|E|"") [ -e /usr/games/simutrans ] && echo -e '''\n  Simulatrans \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo && sudo apt install simutrans* && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     f|F|"") [ -e /home/$USER/Downloads/speed-dreams-src-base-2.2.2-r6553.tar.xz ] && sudo apt install cmake libopenscenegraph-3.4-dev freeglut3-dev libvorbis-dev libsdl2-dev libopenal-dev libenet-dev libexpat1-dev libjpeg-dev libplib-dev libpng-dev libcurl4-openssl-dev && cd /home/$USER/Downloads && tar xvfa speed-dreams-src-base-2.2.2-r6553.tar.xz && mkdir build && cd build && cmake -D OPTION_OFFICIAL_ONLY:BOOL=ON .. && make && sudo make install && echo "export PATH=$PATH:/usr/local/games" >> ~/.bashrc && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores || echo -e '''\n  O arquivo \033[46mspeed-dreams-src-base-2.2.2-r6553.tar.xz\033[0m \033[5mnão\033[0m foi baixado! 
-     
-  Por favor, baixe o arquivo da página que abrirá 
-  em seu navegador.\n''' && sleep 5 && firefox https://sourceforge.net/projects/speed-dreams/files/latest/download && read -n1 -s -p "  Pressione uma tecla para continuar..." && Simuladores ;;
-     g|G|"") Joojs ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Simuladores ;;
+     a|A|"") [ -e /usr/games/fgfs ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL flightgear && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     b|B|"") [ -e /usr/games/opencity ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL opencity && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     c|C|"") [ -e /usr/games/openssn ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL openssn && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     d|D|"") [ -e /usr/games/openttd ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL openttd && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     e|E|"") [ -e /usr/games/simutrans ] && echo -e "$INSTALLED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL simutrans* && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     f|F|"") [ -e ~/Downloads/speed-dreams-src-base-2.2.2-r6553.tar.xz ] && $APT_INSTALL cmake libopenscenegraph-3.4-dev freeglut3-dev libvorbis-dev libsdl2-dev libopenal-dev libenet-dev libexpat1-dev libjpeg-dev libplib-dev libpng-dev libcurl4-openssl-dev && cd ~/Downloads && tar xvfa speed-dreams-src-base-2.2.2-r6553.tar.xz && mkdir build && cd build && cmake -D OPTION_OFFICIAL_ONLY:BOOL=ON .. && make && sudo make install && echo "export PATH=$PATH:/usr/local/games" >> ~/.bashrc && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Simuladores || echo -e "$NOT_FOUND" && sleep 5 && firefox https://sourceforge.net/projects/speed-dreams/files/latest/download && read -n1 -s -p "$CONTINUE" && Simuladores ;;
+     z|Z|"") Joojs ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Simuladores ;;
    esac
  }
 
 function Gameplay() {
-clear && echo -e ''' ---------------------------------
- {A}-> Emuladores
- {B}-> Joystick
- {C}-> Lutris
- {D}-> PlayOnLinux
- {E}-> Q4Wine
- {F}-> Wine
- {G}-> Winetricks
- {H}-> Retornar ao menu anterior 
- --------------------------------- \n'''
+clear && echo -e "\n {A} Emuladores \n {B} Joystick \n {C} Lutris
+ {D} PlayOnLinux \n {E} Q4Wine \n {F} Wine \n {G} Winetricks \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 Gameplays && echo
 
    case $Gameplays in
      a|A|"") Emuladores ;;
-     b|B|"") echo && sudo apt install joystick && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     c|C|"") [ -e /bin/lutris ] && echo -e '''\n  A Plataforma de jogos \033[33mLutris\033[0m \033[5mjá está instalada! \033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && sudo add-apt-repository ppa:lutris-team/lutris && apt-get update && apt-get install lutris && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     d|D|"") [ -e /bin/playonlinux ] && echo -e '''\n  PlayOnLinux \033[5mjá está instalado! \033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && sudo apt install playonlinux && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     e|E|"") [ -e /bin/q4wine ] && echo -e '''\n  Q4Wine \033[5mjá está instalado! \033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && sudo apt install q4wine && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     f|F|"") [ -e /bin/wine ] && echo -e '''\n  Wine \033[5mjá está instalado! \033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && sudo apt install wine && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     g|G|"") [ -e /bin/winetricks ] && echo -e '''\n  Winetricks \033[5mjá está instalado! \033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && sudo apt install winetricks && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay ;;
-     h|H|"") Menuini ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Gameplay ;;
+     b|B|"") echo && $APT_INSTALL joystick && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     c|C|"") [ -e /bin/lutris ] && echo -e "\n  A Plataforma de jogos \033[33mLutris\033[0m \033[5mestá instalada! \033[0m \n" && read -n1 -s -p "$CONTINUE" && Gameplay || echo && sudo add-apt-repository ppa:lutris-team/lutris && apt-get update && apt-get install lutris && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     d|D|"") [ -e /bin/playonlinux ] && echo -e "\n  PlayOnLinux está instalado! \n" && read -n1 -s -p "$CONTINUE" && Gameplay || echo && $APT_INSTALL playonlinux && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     e|E|"") [ -e /bin/q4wine ] && echo -e "\n  Q4Wine está instalado! \n" && read -n1 -s -p "$CONTINUE" && Gameplay || echo && $APT_INSTALL q4wine && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     f|F|"") [ -e /bin/wine ] && echo -e "\n  Wine está instalado! \n" && read -n1 -s -p "  Pressione uma tecla para continuar..." && Gameplay || echo && $APT_INSTALL wine && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     g|G|"") [ -e /bin/winetricks ] && echo -e "\n  Winetricks está instalado! \n" && read -n1 -s -p "$CONTINUE" && Gameplay || echo && $APT_INSTALL winetricks && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Gameplay ;;
+     z|Z|"") Menuini ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Gameplay ;;
    esac
  }
 
 function Emuladores() {
-clear && echo -e ''' -----------------------------------
- {A}-> BlastEm (Sega Genesis)
- {B}-> Dolphin (GameCube & Wii)
- {C}-> DOSBox (MS-DOS)
- {D}-> GNOME Video Arcade (Arcade)
- {E}-> Mednafen (Multi)
- {F}-> Mupen64Plus-Qt (Nintendo 64)
- {G}-> Nestopia (NES) 
- {H}-> PCSX2 (Playstation 2)
- {I}-> PCSXR (Playstation One)
- {J}-> RetroArch (Multi)
- {K}-> Stella (Atari 2600)
- {L}-> Ybause (Sega Saturn)
- ----------------------------------- \n'''
+clear && echo -e "\n {A} BlastEm (Sega Genesis) \n {B} Dolphin (GameCube & Wii) \n {C} DOSBox (MS-DOS)
+ {D} GNOME Video Arcade (Arcade) \n {E} Mednafen (Multi) \n {F} Mupen64Plus-Qt (Nintendo 64)
+ {G} Nestopia (NES) \ {H} PCSX2 (Playstation 2) \n {I} PCSXR (Playstation One)
+ {J} RetroArch (Multi) \n {K} Stella (Atari 2600) \n {L} Ybause (Sega Saturn) \n
+ {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
    read -n1 EMULA && echo
    
    case $EMULA in
-     a|A|"") [ -e /usr/games/blastem ] && echo -e '''\n  BlastEm \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install blastem && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     b|B|"") [ -e /usr/games/dolphin-emu ] && echo -e '''\n  Dolphin \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install dolphin-emu && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     c|C|"") [ -e /usr/games/dosbox ] && echo -e '''\n  DOSBox \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install dosbox && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     d|D|"") [ -e /usr/games/gnome-video-arcade ] && echo -e '''\n  GNOME Video Arcade \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install gnome-video-arcade && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     e|E|"") [ -e /usr/games/mednafen ] && echo -e '''\n  Mednafen \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install mednafen && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     f|F|"") [ -e /usr/games/mupen64plus-qt ] && echo -e '''\n  Mupen64Plus-Qt \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install mupen64plus-qt && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     g|G|"") [ -e /usr/games/nestopia ] && echo -e '''\n  Nestopia \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install nestopia && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     h|H|"") [ -e /usr/games/pcsx2 ] && echo -e '''\n  PCSX2 \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install pcsx2 && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     i|I|"") [ -e /usr/games/pcsxr ] && echo -e '''\n  PCSXR \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install pcsxr && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     j|J|"") [ -e /usr/games/retroarch ] && echo -e '''\n  RetroArch \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install retroarch && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     k|K|"") [ -e /usr/games/stella ] && echo -e '''\n  Stella \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install stella && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     l|L|"") [ -e /usr/games/ybause ] && echo -e '''\n  Ybause \033[5mestá instalado!\033[0m\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores || echo && sudo apt install ybause && echo -e '''\n  Processo de instalação concluído!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && Emuladores ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Emuladores ;;
+     a|A|"") [ -e /usr/games/blastem ] && echo -e "\n  BlastEm está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL blastem && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     b|B|"") [ -e /usr/games/dolphin-emu ] && echo -e "\n  Dolphin está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL dolphin-emu && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     c|C|"") [ -e /usr/games/dosbox ] && echo -e "\n  DOSBox \033[5mestá instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL dosbox && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     d|D|"") [ -e /usr/games/gnome-video-arcade ] && echo -e "\n  GNOME Video Arcade está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL gnome-video-arcade && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     e|E|"") [ -e /usr/games/mednafen ] && echo -e "\n  Mednafen está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL mednafen && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     f|F|"") [ -e /usr/games/mupen64plus-qt ] && echo -e "\n  Mupen64Plus-Qt está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL mupen64plus-qt && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     g|G|"") [ -e /usr/games/nestopia ] && echo -e "\n  Nestopia está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL nestopia && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     h|H|"") [ -e /usr/games/pcsx2 ] && echo -e "\n  PCSX2 está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL pcsx2 && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     i|I|"") [ -e /usr/games/pcsxr ] && echo -e "\n  PCSXR está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL pcsxr && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     j|J|"") [ -e /usr/games/retroarch ] && echo -e "\n  RetroArch está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL retroarch && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     k|K|"") [ -e /usr/games/stella ] && echo -e "\n  Stella está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL stella && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     l|L|"") [ -e /usr/games/ybause ] && echo -e "\n  Ybause está instalado! \n" && read -n1 -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL ybause && echo -e "$COMPLETED" && read -n1 -s -p "$CONTINUE" && Emuladores ;;
+     z|Z|"") Gameplay ;; 
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Emuladores ;;
    esac
  }
 
 function Firefox() {
-clear && echo -e ''' --------------------------------
-        \033[31mBrowser\033[0m \033[34mGames\033[0m
- --------------------------------\n
- {A}-> Ancient Beast
- {B}-> Survivor
- {C}-> Telehack
- {D}-> Tetris.exe
- {E}-> Retornar ao menu anterior
- -------------------------------- \n'''
+clear && echo -e "\n Escolha uma das opções abaixo e aguarde a página 
+ do jogo carregar em seu navegador \033[31mFire\033[34mfox\033[0m \n
+ {A} Ancient Beast \n {B} Asteroidx \n {C} Survivor \n {D} Telehack
+ {E} Tetris.exe \n \n {Z} Retornar ao menu anterior \n"
   echo -n "  => Esolha uma das opções: "
    read -n1 OPTIONK && echo
 
    case $OPTIONK in
      a|A|"") firefox https://beta.ancientbeast.com && Firefox ;;
-     b|B|"") firefox http://www.schillmania.com/survivor && Firefox ;;
-     c|C|"") firefox http://telehack.com/ && Firefox ;;
-     d|D|"") firefox https://archive.org/details/TETRIS.EXE && Firefox ;;
-     e|E|"") Menuini ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && Firefox ;;
+     b|B|"") firefox https://kronbits.itch.io/asteroidx && Firefox ;;
+     c|C|"") firefox http://www.schillmania.com/survivor && Firefox ;;
+     d|D|"") firefox http://telehack.com/ && Firefox ;;
+     e|E|"") firefox https://archive.org/details/TETRIS.EXE && Firefox ;;
+     z|Z|"") Menuini ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && Firefox ;;
    esac
  }
 
 function TermExec() {
-clear && echo -e ''' ----------------------------------------------
- {A}-> 4D Maze Game | {B}-> Biogenesis 
- {C}-> Cows Revenge | {D}-> Deliantra
- {E}-> RogueBox Adventures
- {F}-> Open Imperium Galactica       
- {G}-> reTux | {H}-> RuneLite 
- {I}-> Slender The Nine Pages
- {J}-> Speed Dreams 2 | {K}-> Stunt Rally
- {L}-> The Powder Toy | {M}-> Tux4You Genesis
- {N}-> Uebergame | {O}-> Warsow | {P}-> YSoccer
- 
- {Q}-> Retornar ao menu anterior
- ----------------------------------------------\n'''
+clear && echo -e "\n  \033[4m{A} 4D Maze Game\033[0m  \033[4m{B} Biogenesis\033[0m  \033[4m{C} C-Dogs SDL\033[0m
+  \033[4m{D} Cows Revenge\033[0m  \033[4m{E} Deliantra\033[0m  \033[4m{F} H-Craft Championship\033[0m
+  \033[4m{G} MegaMek\033[0m  \033[4m{H} Mirror Magic\033[0m  \033[4m{I} Open Imperium Galactica\033[0m
+  \033[4m{J} reTux\033[0m  \033[4m{K} RogueBox Adventures\033[0m  \033[4m{L} RuneLite\033[0m
+  \033[4m{M} Slender The Nine Pages\033[0m  \033[4m{N} Speed Dreams 2\033[0m  \033[4m{O} Stunt Rally\033[0m
+  \033[4m{P} The Pandoran War\033[0m  \033[4m{Q} The Powder Toy\033[0m  \033[4m{R} Tribal Trouble\033[0m
+  \033[4m{S} Tux4You Genesis\033[0m  \033[4m{T} Uebergame\033[0m  \033[4m{U} Warsow\033[0m  \033[4m{V} YSoccer\033[0m \n
+  \033[4m{Z} Retornar ao menu anterior\033[0m \n"
   echo -n "  => Esolha uma das opções: "
    read -n1 TERMINATOR && echo
 
    case $TERMINATOR in
-     a|A|"") [ -e /home/$USER/Downloads/maze-2008-exe.jar ] && cd ~/Downloads && java -jar maze-2008-exe.jar && TermExec || echo -e '''\n  O arquivo \033[46mmaze-2008-exe.jar\033[0m \033[5mnão\033[0m foi baixado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     b|B|"") [ -e /home/$USER/Downloads/Biogenesis/ColorMod_1_88/biogenesis.jar ] && cd ~/Downloads/Biogenesis/ColorMod_1_88 && java -jar biogenesis.jar && TermExec || echo -e '''\n  O jogo \033[46mBiogenesis\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     c|C|"") [ -e /home/$USER/Downloads/CowsRevenge.x86_64 ] && cd ~/Downloads && ./CowsRevenge.x86_64 && TermExec || echo -e '''\n  O arquivo \033[46mCowsRevenge.x86_64\033[0m \033[5mnão\033[0m foi baixado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     d|D|"") [ -e /home/$USER/Downloads/deliantra-gnu-linux-amd64 ] && cd ~/Downloads && ./deliantra-gnu-linux-amd64 && TermExec || echo -e '''\n  O jogo \033[46mDeliantra\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     e|E|"") [ -e /home/$USER/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit/run ] && cd ~/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit && ./run && TermExec || echo -e '''\n  O jogo \033[46mRogueBox Adventures\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     f|F|"") [ -e /home/$USER/Downloads/open-ig-launcher.jar ] && cd ~/Downloads && java -jar open-ig-launcher.jar && TermExec || echo -e '''\n  O arquivo \033[46mopen-ig-launcher.jar\033[0m \033[5mnão\033[0m foi baixado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     g|G|"") [ -e /home/$USER/Downloads/retux-1.3.6-linux-gnu-x86_64/retux ] && cd ~/Downloads/retux-1.3.6-linux-gnu-x86_64 && ./retux && TermExec || echo -e '''\n  O jogo \033[46mretux\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     h|H|"") [ -e /home/$USER/Downloads/RuneLite.AppImage ] && cd ~/Downloads && ./RuneLite.AppImage && TermExec || echo -e '''\n  O jogo \033[46mRuneLite\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     i|I|"") [ -e /home/$USER/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux/Slender\ The\ Nine\ Pages ] && cd ~/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux && ./Slender\ The\ Nine\ Pages && TermExec || echo -e '''\n  O jogo \033[46mSlender The Nine Pages\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     j|J|"") speed-dreams-2 && TermExec ;;
-     l|L|"") [ -e /home/$USER/Downloads/The_Powder_Toy/powder64 ] && cd ~/Downloads/The_Powder_Toy && ./powder64 && TermExec || echo -e '''\n  O jogo \033[46mThe Powder Toy\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     m|M|"") [ -e /home/$USER/Downloads/Genesis-linux-mac/rpgboss ] && cd ~/Downloads/Genesis-linux-mac && ./rpgboss && TermExec || echo -e '''\n  O jogo \033[46mTux4You Genesis\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     n|N|"") [ -e /home/$USER/Downloads/Uebergame-1.1.2.0/Uebergame ] && cd ~/Downloads/Uebergame-1.1.2.0 && ./Uebergame && TermExec || echo -e '''\n  O jogo \033[46mUebergame\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     o|O|"") [ -e /home/$USER/Downloads/warsow-2.1.2/warsow ] && cd ~/Downloads/warsow-2.1.2 && ./warsow && TermExec || echo -e '''\n  O jogo \033[46mWarsow\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     p|P|"") [ -e /home/$USER/Downloads/ysoccer19_linux64/ysoccer ] && cd ~/Downloads/ysoccer19_linux64 && echo && ./ysoccer && TermExec || echo -e '''\n  O jogo \033[46mYSoccer\033[0m \033[5mnão\033[0m foi instalado!\n''' && read -n1 -s -p "  Pressione uma tecla para continuar..." && TermExec ;;
-     q|Q|"") Menuini ;;
-     *) echo -e '''\n  \033[41mOpção inválida!\033[0m''' && sleep 3 && TermExec ;;
+     a|A|"") [ -e ~/Downloads/maze-2008-exe.jar ] && cd ~/Downloads && java -jar maze-2008-exe.jar && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     b|B|"") [ -e ~/Downloads/Biogenesis/ColorMod_1_88/biogenesis.jar ] && cd ~/Downloads/Biogenesis/ColorMod_1_88 && java -jar biogenesis.jar && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     c|C|"") [ -e ~/Downloads/C-Dogs SDL-0.7.3-Linux/bin/cdogs-sdl ] && cd ~/Downloads/C-Dogs SDL-0.7.3-Linux/bin && ./cdogs-sdl && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     d|D|"") [ -e ~/Downloads/CowsRevenge.x86_64 ] && cd ~/Downloads && ./CowsRevenge.x86_64 && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     e|E|"") [ -e ~/Downloads/deliantra-gnu-linux-amd64 ] && cd ~/Downloads && ./deliantra-gnu-linux-amd64 && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     f|F|"") [ -e ~/Downloads/hcraft/hcraft ] && cd ~/Downloads/hcraft && ./hcraft && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     g|G|"") [ -e ~/Downloads/mekhq-0.46.1/MegaMek.jar ] && cd ~/Downloads/mekhq-0.46.1 && java -jar MegaMek.jar && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     h|H|"") [ -e ~/Downloads/mirrormagic-3.0.0 ] && cd ~/Downloads/ && ./mirrormagic && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     i|I|"") [ -e ~/Downloads/open-ig-launcher.jar ] && cd ~/Downloads && java -jar open-ig-launcher.jar && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     j|J|"") [ -e ~/Downloads/retux-1.3.6-linux-gnu-x86_64/retux ] && cd ~/Downloads/retux-1.3.6-linux-gnu-x86_64 && ./retux && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     k|K|"") [ -e ~/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit/run ] && cd ~/Downloads/RogueBoxAdventures_v3_0_1_GNU+Linux_64Bit && ./run && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     l|L|"") [ -e ~/Downloads/RuneLite.AppImage ] && cd ~/Downloads && ./RuneLite.AppImage && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     m|M|"") [ -e ~/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux/Slender\ The\ Nine\ Pages ] && cd ~/Downloads/Slender\ The\ Nine\ Pages\ +\ for\ Linux && ./Slender\ The\ Nine\ Pages && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     n|N|"") speed-dreams-2 && TermExec ;;
+     o|O|"") [ -e ~/Downloads/StuntRally-2.6-linux64/ ] && cd ~/Downloads/StuntRally-2.6-linux64 && ./stuntrally && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     p|P|"") [ -e ~/Downloads/tbftss-1.5.0/tbftss ] && cd ~/Downloads/tbftss-1.5.0 && ./tbftss && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     q|Q|"") [ -e ~/Downloads/The_Powder_Toy/powder64 ] && cd ~/Downloads/The_Powder_Toy && ./powder64 && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     r|R|"") [ -e ~/Downloads/tribaltrouble/tribaltrouble ] && cd ~/Downloads/tribaltrouble && ./tribaltrouble && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     s|S|"") [ -e ~/Downloads/Genesis-linux-mac/rpgboss ] && cd ~/Downloads/Genesis-linux-mac && ./rpgboss && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     t|T|"") [ -e ~/Downloads/Uebergame-1.1.2.0/Uebergame ] && cd ~/Downloads/Uebergame-1.1.2.0 && ./Uebergame && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     u|U|"") [ -e ~/Downloads/warsow-2.1.2/warsow ] && cd ~/Downloads/warsow-2.1.2 && ./warsow && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     v|V|"") [ -e ~/Downloads/ysoccer19_linux64/ysoccer ] && cd ~/Downloads/ysoccer19_linux64 && echo && ./ysoccer && TermExec || echo -e "$NOT_INSTALLED" && read -n1 -s -p "$CONTINUE" && TermExec ;;
+     z|Z|"") Menuini ;;
+     *) echo -e "\n  \033[41mOpção inválida! \033[0m" && sleep 3 && TermExec ;;
    esac
-}
+ }
 
 Menuini
