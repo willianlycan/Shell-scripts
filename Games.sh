@@ -625,14 +625,18 @@ clear && echo -e "\n Escolha uma das opções abaixo e aguarde a página
  }
 
 function TermExec() {
-clear && echo -e "\n  \033[4m{A} 4D Maze Game\033[0m  \033[4m{B} Biogenesis\033[0m  \033[4m{C} C-Dogs SDL\033[0m
-  \033[4m{D} Cows Revenge\033[0m  \033[4m{E} Deliantra\033[0m  \033[4m{F} H-Craft Championship\033[0m
-  \033[4m{G} MegaMek\033[0m  \033[4m{H} Mirror Magic\033[0m  \033[4m{I} Open Imperium Galactica\033[0m
-  \033[4m{J} reTux\033[0m  \033[4m{K} RogueBox Adventures\033[0m  \033[4m{L} RuneLite\033[0m
-  \033[4m{M} Slender The Nine Pages\033[0m  \033[4m{N} Speed Dreams 2\033[0m  \033[4m{O} Stunt Rally\033[0m
-  \033[4m{P} The Pandoran War\033[0m  \033[4m{Q} The Powder Toy\033[0m  \033[4m{R} Tribal Trouble\033[0m
-  \033[4m{S} Tux4You Genesis\033[0m  \033[4m{T} Uebergame\033[0m  \033[4m{U} Warsow\033[0m  \033[4m{V} YSoccer\033[0m \n
-  \033[4m{Z} Retornar ao menu anterior\033[0m \n"
+clear && echo -e "\n\033[1m {A} 4D Maze Game             || {B} Biogenesis  
+ {C} C-Dogs SDL               || {D} Cows Revenge
+ {E} Deliantra                || {F} H-Craft Championship
+ {G} MegaMek                  || {H} Mirror Magic 
+ {I} Open Imperium Galactica  || {J} reTux
+ {K} RogueBox Adventures      || {L} RuneLite
+ {M} Slender The Nine Pages   || {N} Speed Dreams 2
+ {O} Stunt Rally              || {P} The Pandoran War 
+ {Q} The Powder Toy           || {R} Tribal Trouble
+ {S} Tux4You Genesis          || {T} Uebergame 
+ {U} Warsow                   || {V} YSoccer \n
+ {Z} Retornar ao menu anterior \033[0m\n"
   echo -n "  => Esolha uma das opções: "
    read -n1 TERMINATOR && echo
 
