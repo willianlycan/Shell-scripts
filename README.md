@@ -1,3 +1,3 @@
 # Shell-scripts
-Scripts simples que automatizam determinados recursos do SO.
-Desenvolvidos em Bash Script
+Scripts simples que automatizam determinadas tarefas do SO.
+Desenvolvidos em Bash Script, para distros Ubuntu e derivados.
