@@ -581,7 +581,7 @@ clear && echo -e "\n {A} Emuladores \n {B} Joystick \n {C} Lutris
 function Emuladores() {
 clear && echo -e "\n {A} BlastEm (Sega Genesis) \n {B} Dolphin (GameCube & Wii) \n {C} DOSBox (MS-DOS)
  {D} GNOME Video Arcade (Arcade) \n {E} Mednafen (Multi) \n {F} Mupen64Plus-Qt (Nintendo 64)
- {G} Nestopia (NES) \ {H} PCSX2 (Playstation 2) \n {I} PCSXR (Playstation One)
+ {G} Nestopia (NES) \n {H} PCSX2 (Playstation 2) \n {I} PCSXR (Playstation One)
  {J} RetroArch (Multi) \n {K} Stella (Atari 2600) \n {L} Ybause (Sega Saturn) \n
  {Z} Retornar ao menu anterior \n"
   echo -n " => Escolha uma das opções: "
