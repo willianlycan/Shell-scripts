@@ -10,8 +10,8 @@ function Inicio() {
   º     dboa        MM%IMMMMMMMM.
   º    dMMMMMMb      ¨M%LMMMMMMP.
   º     qMMMMMMP        ¨L%MMMP , \\033[0m{C}-> Utilitários \\033[32m
-   .   \`#MMMMM           I%6P ,
-    º   \`MMMPª           %A¨\\,  
+   .   \`#MMMMM            I%6P ,
+    º   \`MMMPª            %A¨\\,  
      º    :MM             .-N,
       º.   \`#?.   .       .,º \\033[0m {X}-> Sair \\033[32m
          -.   .         .-
