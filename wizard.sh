@@ -83,22 +83,8 @@ function Util() {
      z|Z) Inicio ;;
      *) echo -e "  \\033[41mOpção inválida! \\033[0m" && sleep 3 && Util ;;
    esac
-  }
-  
-function Banners() {
- clear && echo -e "\\n {A} FIGlet \\n {B} TOIlet \\n
- {Z} Retornar ao menu anterior \\n"
- echo -n " => Escolha uma das opções: "
-  read -n1 -r ASCII && echo -e "\\n"
-  
-   case $ASCII in
-     a|A) [ -e /usr/bin/figlet-figlet ] && figlet -f slant -c -k FIGlet && echo -e "\\n Teste \\033[5mconcluído\\033[0m! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Banners || echo -e "  O pacote FIGlet \\033[5mnão está instalado\\033[0m! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Banners ;;
-     b|B) [ -e /usr/bin/toilet ] && toilet -kf script --metal " The Metal" && echo -e "\\n Teste \\033[5mconcluído\\033[0m! \\n" && read -n1 -r -s -p "Pressione uma tecla para continuar..." && Banners || echo -e "  O pacote TOIlet \\033[5mnão está instalado\\033[0m! \\n" && read -n1 -r -s -p "Pressione uma tecla para continuar..." && Banners ;;
-     z|Z) Util ;;
-     *) echo -e "\\n  \\033[41mOpção inválida! \\033[0m" && sleep 3 && Banners ;;
-   esac
  }
-  
+
 function Iso() {
  clear && echo -e -n "\\n    \\033[1mCriar pasta para montar a imagem ISO\\033[0m \\n \\n => Digite o nome da pasta: "
   read -r PASTA
@@ -126,6 +112,20 @@ function Montagem() {
    esac
 }
 
+function Banners() {
+ clear && echo -e "\\n {A} FIGlet \\n {B} TOIlet \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r ASCII && echo -e "\\n"
+  
+   case $ASCII in
+     a|A) [ -e /usr/bin/figlet-figlet ] && figlet -f slant -c -k FIGlet && echo -e "\\n Teste \\033[5mconcluído\\033[0m! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Banners || echo -e "  O pacote FIGlet \\033[5mnão está instalado\\033[0m! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Banners ;;
+     b|B) [ -e /usr/bin/toilet ] && toilet -kf script --metal " The Metal" && echo -e "\\n Teste \\033[5mconcluído\\033[0m! \\n" && read -n1 -r -s -p "Pressione uma tecla para continuar..." && Banners || echo -e "  O pacote TOIlet \\033[5mnão está instalado\\033[0m! \\n" && read -n1 -r -s -p "Pressione uma tecla para continuar..." && Banners ;;
+     z|Z) Util ;;
+     *) echo -e "\\n  \\033[41mOpção inválida! \\033[0m" && sleep 3 && Banners ;;
+   esac
+ }
+
 function Hash() {
  cd ~/Downloads && clear && echo -e "\\n {A} MD5 \\n {B} SHA-256 \\n
  {Z} Retornar ao menu anterior \\n"
@@ -138,6 +138,6 @@ function Hash() {
      z|Z) Util ;;
      *) echo -e "\\n  \\033[41mOpção inválida! \\033[0m" && sleep 3 && Hash ;;
    esac
-  }
+ }
 
- Inicio
+Inicio
