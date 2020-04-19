@@ -60,8 +60,8 @@ function Instalar() {
  
 function Guarda() {
  clear && echo -e "\\n {A} Verificar SO em busca por rootkits \\n \\n {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r GUARDA && echo -e "\\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r GUARDA && echo -e "\\n"
 
    case $GUARDA in
      a|A) [ -d /usr/lib/chkrootkit ] && sudo chkrootkit && echo -e "\\n  Varredura \\033[5mconcluída\\033[0m! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Guarda || echo -e "\\n O pacote chkrootkit \\033[5mnão\\033[0m está instalado! \\n" && read -n1 -r -s -p " Pressione uma tecla para continuar..." && Guarda ;;
