@@ -13,11 +13,10 @@ declare -A \(
 
 function Menuini() {
  clear && echo -e "\\n     \\033[1mJogos para Linux Ubuntu e derivados\\033[0m \\n
-  {A} Baixar e instalar jogos \\n {B} Baixar e instalar recursos para gameplay
-  {C} Jogar no navegador \\n {D} Play games
-  {X} Sair \\n"
-  echo -n "  => Esolha uma das opções: "
-   read -n1 -r OPTION && echo -e "\\n"
+ {A} Baixar e instalar jogos \\n {B} Baixar e instalar recursos para gameplay
+ {C} Jogar no navegador \\n {D} Play games \\n {X} Sair \\n"
+ echo -n "  => Esolha uma das opções: "
+  read -n1 -r OPTION && echo -e "\\n"
 
    case $OPTION in
      a|A) Joojs ;;
@@ -30,12 +29,12 @@ function Menuini() {
  }
 
 function Joojs() {
-clear && echo -e "\\n {A} Ação \\n {B} Arcade \\n {C} Aventura
+ clear && echo -e "\\n {A} Ação \\n {B} Arcade \\n {C} Aventura
  {D} Educativos \\n {E} Esportes \\n {F} Estratégia
  {G} FPS+RTS \\n {H} MMORPG \\n {I} RPG \\n {J} Simuladores \\n
  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r OPTION2 && echo -e "\\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r OPTION2 && echo -e "\\n"
   
    case $OPTION2 in
      a|A) Action ;;
@@ -211,8 +210,8 @@ function Arcade() {
  clear && echo -e "\\n {A} Corrrida \\n {B} Mirror Magic \\n {C} Musical
  {D} Pacman Clone \\n {E} Teeworlds \\n {F} Top-down shooter \\n {G} xgalaga++ \\n
  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r FLIPERAMA && echo -e "\\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r FLIPERAMA && echo -e "\\n"
 
    case $FLIPERAMA in
      a|A) Nfs ;;
@@ -364,11 +363,11 @@ function Esportes() {
  }
  
 function Estrategia() {
-clear && echo -e "\\n {A} Baralho \\n {B} RTS
+ clear && echo -e "\\n {A} Baralho \\n {B} RTS
  {C} Tabuleiro \\n {D} TBS \\n {E} Tower defense \\n
  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r ESTRATOSFERA && echo -e "\\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r ESTRATOSFERA && echo -e "\\n"
 
    case $ESTRATOSFERA in
      a|A) CardGame ;;
@@ -383,9 +382,9 @@ clear && echo -e "\\n {A} Baralho \\n {B} RTS
 
 function CardGame() {
  clear && echo -e "\\n {A} Magarena \\n {B} PySol Fan Club Edition \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r CARDS && echo -e "\\n"
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r CARDS && echo -e "\\n"
 
    case $CARDS in
      a|A) [ -e ~/Games/magarena/Magarena.sh ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && CardGame || echo -e "$SELECT" && sleep 5 && lutris install/magarena && CardGame ;;
@@ -397,12 +396,12 @@ function CardGame() {
 
 function Realtime() {
  clear && echo -e "\\n {A} 0 A.D. \\n {B} Annex: Conquer the World \\n {C} Bos Wars
-  {D} Gigalomania \\n {E} Globulation 2 \\n {F} MegaGlest
-  {G} OpenDungeons \\n {H} Open Imperium Galactica \\n {I} OpenRA
-  {J} Tribal Trouble \\n {K} Warzone 2100 \\n {L} Widelands \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r REAL && echo -e "\\n"
+ {D} Gigalomania \\n {E} Globulation 2 \\n {F} MegaGlest
+ {G} OpenDungeons \\n {H} Open Imperium Galactica \\n {I} OpenRA
+ {J} Tribal Trouble \\n {K} Warzone 2100 \\n {L} Widelands \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r REAL && echo -e "\\n"
 
    case $REAL in
      a|A) [ -e /usr/games/0ad ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Realtime || echo && $APT_INSTALL 0ad && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Realtime ;;
@@ -424,10 +423,10 @@ function Realtime() {
  
 function BoardGame() {
  clear && echo -e "\\n {A} Domination (Risk Board Game)
-  {B} GNU Go \\n {C} TripleA \\n {D} Xboard (Xadrez) \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r BOARD && echo -e "\\n"
+ {B} GNU Go \\n {C} TripleA \\n {D} Xboard (Xadrez) \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r BOARD && echo -e "\\n"
 
    case $BOARD in
      a|A) [ -e ~/Domination/run.sh ] && echo -e "$WHEREISIT /home/$USER! \\n" && read -n1 -r -s -p "$CONTINUE" && BoardGame || echo && [ -e ~/Downloads/Domination_install_1.2.1.jar ] && cd ~/Downloads && java -jar Domination_install_1.2.1.jar && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && BoardGame || echo && cd ~/Downloads && wget https://sourceforge.net/projects/domination/files/Domination/1.2.1/Domination_install_1.2.1.jar && java -jar Domination_install_1.2.1.jar && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && BoardGame ;;
@@ -440,11 +439,11 @@ function BoardGame() {
  }
  
 function Turned() {
-clear && echo -e "\\n {A} Freeciv \\n {B} FreeOrion \\n {C} MegaMek
+ clear && echo -e "\\n {A} Freeciv \\n {B} FreeOrion \\n {C} MegaMek
  {D} The Battle for Wesnoth \\n {E} UFO: Alien Invasion \\n
  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r TURNO && echo -e "\\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r TURNO && echo -e "\\n"
 
    case $TURNO in
      a|A) [ -e /usr/games/freeciv ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Turned || echo && $APT_INSTALL freeciv && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Turned ;;
@@ -458,10 +457,10 @@ clear && echo -e "\\n {A} Freeciv \\n {B} FreeOrion \\n {C} MegaMek
  }
  
 function Defender() {
-clear && echo -e "\\n     \\033[1mMindustry\\033[0m \\n \\n {A} Instalação via Lutris \\n
+ clear && echo -e "\\n     \\033[1mMindustry\\033[0m \\n \\n {A} Instalação via Lutris \\n
  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Esolha uma das opções: "
-   read -n1 -r TDEF && echo -e "\\n"
+ echo -n " => Esolha uma das opções: "
+  read -n1 -r TDEF && echo -e "\\n"
    
    case $TDEF in
      a|A) [ -e ~/Games/mindustry/start.sh ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Defender || echo -e "$SELECT" && sleep 3 && lutris install/mindustry && Defender ;;
@@ -472,9 +471,9 @@ clear && echo -e "\\n     \\033[1mMindustry\\033[0m \\n \\n {A} Instalação via
  
 function Fpsgs() {
  clear && echo -e "\\n {A} Savage XR \\n {B} Unvanquished \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Esolha uma das opções: "
-   read -n1 -r RTSS && echo -e "\\n"
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Esolha uma das opções: "
+  read -n1 -r RTSS && echo -e "\\n"
 
    case $RTSS in
      a|A) [ -e ~/.wine/drive_c/Program\ Files\ \(x86\)/Savage\ XR ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Fpsgs || echo && [ -e ~/Downloads/xr_setup-1.0-cl_win_prod.exe ] && cd ~/Downloads && wine xr_setup-1.0-cl_win_prod.exe && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Fpsgs || echo -e "$NOT_FOUND" && sleep 5 && firefox https://savagexr.com/thankyou_windows_newerth_de.html && Fpsgs ;;
@@ -486,10 +485,10 @@ function Fpsgs() {
  
 function Mmorpg() {
  clear && echo -e "\\n {A} Albion Online \\n {B} Crossfire \\n {C} Daimonin \\n {D} Deliantra 
-  {E} PlaneShift \\n {F} RuneLite \\n {G} Stendhal \\n {H} The Mana World \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Esolha uma das opções: "
-   read -n1 -r MMORPGX && echo -e "\\n"
+ {E} PlaneShift \\n {F} RuneLite \\n {G} Stendhal \\n {H} The Mana World \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Esolha uma das opções: "
+  read -n1 -r MMORPGX && echo -e "\\n"
    
    case $MMORPGX in
      a|A) [ -e ~/Games/albion-online/data/Albion-Online ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Mmorpg || echo -e "$SELECT" && sleep 3 && lutris install/freedroidrpg && Mmorpg ;;
@@ -505,11 +504,11 @@ function Mmorpg() {
    esac
  }
 
-function RPG() {
+function Rpg() {
  clear && echo -e "\\n {A} Flare \\n {B} FreeDink \\n {C} Freedroid RPG \\n {D} Roguelike (masmorra) \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Esolha uma das opções: "
-   read -n1 -r RPGX && echo -e "\\n"
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Esolha uma das opções: "
+  read -n1 -r RPGX && echo -e "\\n"
 
    case $RPGX in
      a|A) [ -e ~/Games/flare/flare.sh ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Rpg || echo -e "$SELECT" && sleep 3 && lutris install/flare && Rpg ;;
@@ -523,10 +522,10 @@ function RPG() {
 
 function Rogueliked() {
  clear && echo -e "\\n {A} Cataclysm: Dark Days Ahead \\n {B} Dungeon Crawl Stone Soup
-  {C} Erebus \\n {D} Pathos: Nethack Codex \\n {E} Powder \\n {F} RogueBox Adventures \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r ROGUE && echo -e "\\n"
+ {C} Erebus \\n {D} Pathos: Nethack Codex \\n {E} Powder \\n {F} RogueBox Adventures \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r ROGUE && echo -e "\\n"
 
    case $ROGUE in
      a|A) [ -e /usr/games/cataclysm ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Rogueliked || echo && $APT_INSTALL cataclysm-dda-* && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Rogueliked ;;
@@ -542,11 +541,11 @@ function Rogueliked() {
  
 function Simuladores() {
  clear && echo -e "\\n {A} Flightgear (simulador de vôo) \\n {B} Opencity (simulador de cidade)
-  {C} OpenSSN (simulador de submarino) \\n {D} OpenTTD (simulador de transportes)
-  {E} Simulatrans (simulador de transportes) \\n {F} Speed Dreams (simulador de motorsport) \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r SIM && echo -e "\\n"
+ {C} OpenSSN (simulador de submarino) \\n {D} OpenTTD (simulador de transportes)
+ {E} Simulatrans (simulador de transportes) \\n {F} Speed Dreams (simulador de motorsport) \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r SIM && echo -e "\\n"
 
    case $SIM in
      a|A) [ -e /usr/games/fgfs ] && echo -e "$INSTALLED" && read -n1 -r -s -p "$CONTINUE" && Simuladores || echo && $APT_INSTALL flightgear && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Simuladores ;;
@@ -562,10 +561,10 @@ function Simuladores() {
 
 function Gameplay() {
  clear && echo -e "\\n {A} Emuladores \\n {B} Joystick \\n {C} Lutris
-  {D} PlayOnLinux \\n {E} Q4Wine \\n {F} Wine \\n {G} Winetricks \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r Gameplays && echo -e "\\n"
+ {D} PlayOnLinux \\n {E} Q4Wine \\n {F} Wine \\n {G} Winetricks \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r Gameplays && echo -e "\\n"
 
    case $Gameplays in
      a|A) Emuladores ;;
@@ -582,12 +581,12 @@ function Gameplay() {
 
 function Emuladores() {
  clear && echo -e "\\n {A} BlastEm (Sega Genesis) \\n {B} Dolphin (GameCube & Wii) \\n {C} DOSBox (MS-DOS)
-  {D} GNOME Video Arcade (Arcade) \\n {E} Mednafen (Multi) \\n {F} Mupen64Plus-Qt (Nintendo 64)
-  {G} Nestopia (NES) \\n {H} PCSX2 (Playstation 2) \\n {I} PCSXR (Playstation One)
-  {J} RetroArch (Multi) \\n {K} Stella (Atari 2600) \\n {L} Ybause (Sega Saturn) \\n
-  {Z} Retornar ao menu anterior \\n"
-  echo -n " => Escolha uma das opções: "
-   read -n1 -r EMULA && echo -e "\\n"
+ {D} GNOME Video Arcade (Arcade) \\n {E} Mednafen (Multi) \\n {F} Mupen64Plus-Qt (Nintendo 64)
+ {G} Nestopia (NES) \\n {H} PCSX2 (Playstation 2) \\n {I} PCSXR (Playstation One)
+ {J} RetroArch (Multi) \\n {K} Stella (Atari 2600) \\n {L} Ybause (Sega Saturn) \\n
+ {Z} Retornar ao menu anterior \\n"
+ echo -n " => Escolha uma das opções: "
+  read -n1 -r EMULA && echo -e "\\n"
    
    case $EMULA in
      a|A) [ -e /usr/games/blastem ] && echo -e "  BlastEm está instalado! \\n" && read -n1 -r -s -p "$CONTINUE" && Emuladores || echo && $APT_INSTALL blastem && echo -e "$COMPLETED" && read -n1 -r -s -p "$CONTINUE" && Emuladores ;;
@@ -609,11 +608,11 @@ function Emuladores() {
 
 function Firefox() {
  clear && echo -e "\\n Escolha uma das opções abaixo e aguarde a página 
-  do jogo carregar em seu navegador \\033[31mFire\\033[34mfox\\033[0m \\n
-  {A} Ancient Beast \\n {B} Asteroidx \\n {C} Survivor \\n {D} Telehack
-  {E} Tetris.exe \\n \\n {Z} Retornar ao menu anterior \\n"
-  echo -n "  => Esolha uma das opções: "
-   read -n1 -r OPTIONK && echo -e "\\n"
+ do jogo carregar em seu navegador \\033[31mFire\\033[34mfox\\033[0m \\n
+ {A} Ancient Beast \\n {B} Asteroidx \\n {C} Survivor \\n {D} Telehack
+ {E} Tetris.exe \\n \\n {Z} Retornar ao menu anterior \\n"
+ echo -n "  => Esolha uma das opções: "
+  read -n1 -r OPTIONK && echo -e "\\n"
 
    case $OPTIONK in
      a|A) firefox https://beta.ancientbeast.com && Firefox ;;
