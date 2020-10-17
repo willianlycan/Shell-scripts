@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-#Testado no BigLinux
-declare -A \(
- [ "$INSTALLED" ]="\\n  O jogo está instalado! \\n" 
- [ "$CONTINUE" ]="  Pressione uma tecla para continuar..."
- [ "$APT_INSTALL" ]="sudo apt install"
- [ "$SELECT" ]="\\n  Selecione um instalador na plataforma \\033[33mLutris\\033[0m \\n"
- [ "$COMPLETED" ]="\\n  Processo de instalação concluído! \\n"
- [ "$WHEREISIT" ]="\\n  O diretório do jogo está em"
- [ "$NOT_FOUND" ]="  O arquivo do jogo \\033[5mnão\\033[0m está em /Downloads! \\n \\n Por favor, baixe o arquivo na página que irá carregar em seu navegador. \\n"
- [ "$NOT_INSTALLED" ]="\\n  O jogo \\033[5mnão\\033[0m está instalado! \\n"
- \)
+# Variáveis
+INSTALLED="\\n  O jogo está instalado! \\n" 
+CONTINUE="  Pressione uma tecla para continuar..."
+APT_INSTALL="sudo apt install"
+SELECT="\\n  Selecione um instalador na plataforma \\033[33mLutris\\033[0m \\n"
+COMPLETED="\\n  Processo de instalação concluído! \\n"
+WHEREISIT="\\n  O diretório do jogo está em"
+NOT_FOUND="  O arquivo do jogo \\033[5mnão\\033[0m está em /Downloads! \\n \\n Por favor, baixe o arquivo na página que irá carregar em seu navegador. \\n"
 
 function Menuini() {
  clear && echo -e "\\n     \\033[1mJogos para Linux Ubuntu e derivados\\033[0m \\n
